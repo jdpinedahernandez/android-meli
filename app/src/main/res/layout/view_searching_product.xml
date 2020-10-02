@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="category"
+            type="com.juanpineda.domain.Category" />
+
+    </data>
+
+    <TextView
+        android:id="@+id/productTitle"
+        style="@style/Text2.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:lines="2"
+        android:minLines="2"
+        android:paddingStart="8dp"
+        android:text="@{category.name}"
+        android:textColor="@android:color/black"
+        tools:text="@tools:sample/lorem" />
+
+</layout>
