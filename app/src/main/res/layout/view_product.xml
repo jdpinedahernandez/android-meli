@@ -22,7 +22,7 @@
 
         <com.juanpineda.meli.ui.common.AspectRatioImageView
             android:id="@+id/productCover"
-            android:layout_width="100dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -38,7 +38,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            app:layout_constraintVertical_bias="0.5"
             android:background="@android:color/transparent"
             android:lineSpacingMultiplier="1"
             android:padding="2dp"
@@ -48,24 +47,23 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/productCover"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="Lorem ipsum" />
 
         <TextView
             android:id="@+id/productPrice"
             style="@style/Text2.Normal"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:background="@android:color/transparent"
             android:lineSpacingMultiplier="1"
             android:padding="2dp"
-            android:text="@{String.valueOf(product.price)}"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/productCover"
             app:layout_constraintTop_toBottomOf="@+id/productTitle"
+            app:loadAmount="@{product.price}"
             tools:text="Lorem ipsum" />
 
         <TextView
@@ -73,15 +71,14 @@
             style="@style/Text2.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:background="@android:color/transparent"
             android:lineSpacingMultiplier="1"
             android:padding="2dp"
-            android:text="Envío Gratis"
+            android:text="@string/product_main_item_label"
             android:textColor="@android:color/holo_green_dark"
-            app:layout_constraintBottom_toBottomOf="@+id/imageViewFavorite"
-            app:layout_constraintStart_toEndOf="@+id/productCover"
-            app:layout_constraintTop_toBottomOf="@+id/productPrice" />
+            app:layout_constraintEnd_toStartOf="@+id/imageViewFavorite"
+            app:layout_constraintStart_toEndOf="@+id/productPrice"
+            app:layout_constraintTop_toBottomOf="@+id/productTitle" />
 
         <ImageView
             android:id="@+id/imageViewFavorite"
@@ -89,9 +86,10 @@
             android:layout_height="wrap_content"
             android:src="@{product.favorite ? @drawable/ic_favorite_on :@drawable/ic_favorite_off}"
             android:tint="@color/colorAccent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView" />
 
         <View
             android:layout_width="0dp"
@@ -100,7 +98,7 @@
             android:layout_marginEnd="8dp"
             android:background="@color/colorGray"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/productCover"
-            app:layout_constraintStart_toStartOf="@+id/textView" />
+            app:layout_constraintStart_toStartOf="@+id/productPrice"
+            app:layout_constraintTop_toBottomOf="@+id/productCover" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

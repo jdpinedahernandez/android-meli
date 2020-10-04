@@ -24,13 +24,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
+            android:background="@android:color/white"
             android:theme="@style/AppTheme.DarkOverlay">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                app:contentScrim="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                android:background="@android:color/white"
+                app:layout_scrollFlags="noScroll|snapMargins">
 
                 <ImageView
                     android:id="@+id/productDetailImage"
@@ -50,12 +51,6 @@
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:orientation="horizontal" />
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/productDetailToolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    tools:title="Product name" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -77,9 +72,9 @@
                     android:id="@+id/productDetailSummary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:padding="16dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_marginTop="26dp"
+                    style="@style/Text2.Medium.Bold"
+                    android:paddingStart="16dp"
                     tools:text="Lorem ipsum" />
 
                 <androidx.cardview.widget.CardView
@@ -91,7 +86,7 @@
                     android:clipToPadding="false"
                     android:clipChildren="false"
                     app:cardElevation="10dp"
-                    android:layout_margin="4dp"
+                    android:layout_margin="16dp"
                     app:cardCornerRadius="10dp"
                     app:cardBackgroundColor="@color/colorAccent"
                     app:cardPreventCornerOverlap="false">
@@ -103,7 +98,7 @@
                         android:lineSpacingMultiplier="1.5"
                         android:padding="16dp"
                         android:textColor="@android:color/white"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textAppearance="@style/Text2.Medium.Bold"
                         tools:text="Lorem ipsum" />
                 </androidx.cardview.widget.CardView>
 

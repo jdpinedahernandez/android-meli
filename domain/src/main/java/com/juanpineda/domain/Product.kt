@@ -9,5 +9,7 @@ data class Product(
         val availableQuantity: Int = 0,
         val pictures: List<String> = emptyList(),
         val status: String = "",
-        val favorite: Boolean = false
+        val favorite: Boolean = false,
+        val warranty: String = "",
+        val currencyId: String = ""
 )

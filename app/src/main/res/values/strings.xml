@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">Meli</string>
-    <string name="api_key" > </string>
+    <string name="api_key"> </string>
+    <string name="money">$%s</string>
     <!--  Detail Activity  -->
-    <string name="product_detail_pictures">%s fotos</string>
+    <string name="product_detail_pictures">Imágenes:</string>
     <string name="product_detail_price">Precio:</string>
+    <string name="product_detail_currency">Moneda:</string>
     <string name="product_detail_available_quantity">Cantidad disponible:</string>
     <string name="product_detail_name">Nombre:</string>
     <string name="product_detail_favorite">Favorito:</string>
@@ -14,4 +16,5 @@
     <string name="product_main_empty_products">Bienvenido.\nBusca nuevos productos.</string>
     <string name="product_main_local_title">Productos vistos</string>
     <string name="product_main_search_label">Buscar</string>
+    <string name="product_main_item_label">Envío Gratis</string>
 </resources>

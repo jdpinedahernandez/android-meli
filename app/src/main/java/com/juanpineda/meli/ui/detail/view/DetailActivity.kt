@@ -10,9 +10,9 @@ import com.juanpineda.meli.R
 import com.juanpineda.meli.databinding.ActivityDetailBinding
 import com.juanpineda.meli.ui.common.app
 import com.juanpineda.meli.ui.common.getViewModel
+import com.juanpineda.meli.ui.common.loadContent
 import com.juanpineda.meli.ui.detail.DetailActivityComponent
 import com.juanpineda.meli.ui.detail.DetailActivityModule
-import com.juanpineda.meli.ui.detail.adapters.ProductDetailViewPagerAdapter
 import com.juanpineda.meli.ui.detail.viewmodel.DetailViewModel
 import com.juanpineda.meli.ui.detail.viewmodel.DetailViewModel.UiModel.LoadDetailContent
 import com.juanpineda.meli.ui.detail.viewmodel.DetailViewModel.UiModel.LoadFavoriteContent
@@ -44,10 +44,8 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun loadContentView(product: Product) = with(product) {
-        binding.productDetailToolbar.title = resources.getString(R.string.product_detail_pictures, pictures.size.toString())
-        pictures?.let {
-            binding.viewPagerProducts.adapter = ProductDetailViewPagerAdapter(it)
-        }
+        binding.productDetailSummary.text = product.title
+        binding.viewPagerProducts.loadContent(pictures)
         loadDetailFavoriteView(this)
     }
 
