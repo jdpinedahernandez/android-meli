@@ -19,6 +19,7 @@ buildscript {
     ext.glide_version = "4.11.0"
     ext.arch_core_version = "1.1.1"
     ext.mockwebserver_version = "4.4.0"
+    ext.mockitokotlin_version = "2.1.0"
     repositories {
         google()
         jcenter()
@@ -36,6 +37,64 @@ allprojects {
     repositories {
         google()
         jcenter()
+    }
+
+    ext {
+
+        androidLibs = [
+                appcompat           : "androidx.appcompat:appcompat:$appcompact_version",
+                recyclerview        : "androidx.recyclerview:recyclerview:$recyclerview_version",
+                constraintlayout    : "androidx.constraintlayout:constraintlayout:$constraintlayout_version",
+                androidxCore        : "androidx.core:core-ktx:$core_version",
+                lifecycleViewModel  : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
+                playServicesLocation: "com.google.android.gms:play-services-location:$android_gms_version",
+                material            : "com.google.android.material:material:$android_material_version",
+                roomRuntime         : "androidx.room:room-runtime:$room_version",
+                glide               : "com.github.bumptech.glide:glide:$glide_version",
+                dexter              : 'com.karumi:dexter:6.0.2'
+        ]
+
+        androidKaptLibs = [
+                roomCompiler  : "androidx.room:room-compiler:$room_version",
+                glideCompiler : "com.github.bumptech.glide:compiler:$glide_version",
+                daggerCompiler: "com.google.dagger:dagger-compiler:$dagger_version"
+        ]
+
+        kotlinLibs = [
+                stdlib    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+                coroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+        ]
+
+        libs = [
+                okhttpLoginInterceptor: "com.squareup.okhttp3:logging-interceptor:$okhttp_version",
+                retrofit              : "com.squareup.retrofit2:retrofit:$retrofit_version",
+                retrofitGsonConverter : "com.squareup.retrofit2:converter-gson:$retrofit_version",
+                dagger                : "com.google.dagger:dagger:$dagger_version"
+        ]
+
+        testLibs = [
+                junit         : "junit:junit:$junit_version",
+                mockitoKotlin : "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitokotlin_version",
+                mockitoInline : 'org.mockito:mockito-inline:2.28.2',
+                coroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version",
+        ]
+
+        androidxTestLibs = [
+                archCoreTesting: "android.arch.core:core-testing:$arch_core_version"
+        ]
+
+        kaptTestLibs = [
+                daggerTest: "com.google.dagger:dagger-compiler:$dagger_version"
+        ]
+
+        androidTestLibs = [
+                testRunner   : 'androidx.test:runner:1.2.0',
+                espresso     : "androidx.test.espresso:espresso-core:$test_espresso_version",
+                rules        : 'androidx.test:rules:1.2.0',
+                extJunit     : "androidx.test.ext:junit-ktx:$test_junit_version",
+                mockWebServer: 'com.squareup.okhttp3:mockwebserver:4.2.1',
+                okhttpIdling : 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
+        ]
     }
 }
 

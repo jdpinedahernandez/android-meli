@@ -40,51 +40,15 @@ dependencies {
     implementation project(":domain")
     implementation project(":usecases")
 
-    implementation "androidx.appcompat:appcompat:$appcompact_version"
-    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
-    implementation "androidx.core:core-ktx:$core_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "com.google.android.gms:play-services-location:$android_gms_version"
-    implementation "com.google.android.material:material:$android_material_version"
-    implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
+    implementation androidLibs.values()
+    implementation kotlinLibs.values()
+    implementation libs.values()
+    kapt androidKaptLibs.values()
+    kaptTest kaptTestLibs.values()
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
-
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-
-    implementation "com.github.bumptech.glide:glide:$glide_version"
-    kapt "com.github.bumptech.glide:compiler:$glide_version"
-
-    implementation 'com.karumi:dexter:6.0.2'
-
-    implementation "com.google.dagger:dagger:$dagger_version"
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
-
-    testImplementation "junit:junit:$junit_version"
-    testImplementation "android.arch.core:core-testing:$arch_core_version"
-    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
-    testImplementation 'org.mockito:mockito-inline:2.28.2'
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
-
-    kaptTest "com.google.dagger:dagger-compiler:$dagger_version"
-
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation "androidx.test.espresso:espresso-core:$test_espresso_version"
-    androidTestImplementation 'androidx.test:rules:1.2.0'
-    androidTestImplementation 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
-    androidTestImplementation "androidx.test.espresso:espresso-contrib:$test_espresso_version"
-    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
-
-    //MockWebServer
-    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$mockwebserver_version"
-
-    //Dagger
-    kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
+    testImplementation testLibs.values()
+    testImplementation androidxTestLibs.values()
+    androidTestImplementation androidTestLibs.values()
 }
 repositories {
     mavenCentral()
