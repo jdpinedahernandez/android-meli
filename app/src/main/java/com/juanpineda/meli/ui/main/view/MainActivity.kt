@@ -9,18 +9,16 @@ import androidx.lifecycle.Observer
 import com.juanpineda.domain.Product
 import com.juanpineda.meli.R
 import com.juanpineda.meli.databinding.ActivityMainBinding
-import com.juanpineda.meli.ui.common.app
-import com.juanpineda.meli.ui.common.getViewModel
 import com.juanpineda.meli.ui.common.startActivityForResult
 import com.juanpineda.meli.ui.detail.view.DetailActivity
 import com.juanpineda.meli.ui.detail.view.DetailActivity.Companion.PRODUCT
-import com.juanpineda.meli.ui.main.MainActivityComponent
-import com.juanpineda.meli.ui.main.MainActivityModule
 import com.juanpineda.meli.ui.main.adapters.ContentProductsAdapter
 import com.juanpineda.meli.ui.main.adapters.SearchingProductsAdapter
 import com.juanpineda.meli.ui.main.viewmodel.MainViewModel
 import com.juanpineda.meli.ui.main.viewmodel.MainViewModel.UiModel
 import com.juanpineda.meli.ui.main.viewmodel.MainViewModel.UiModel.*
+import org.koin.androidx.scope.lifecycleScope
+import org.koin.androidx.viewmodel.scope.viewModel
 
 
 class MainActivity : FragmentActivity() {
@@ -29,8 +27,7 @@ class MainActivity : FragmentActivity() {
         const val CODE = 1
     }
 
-    private lateinit var component: MainActivityComponent
-    private val viewModel: MainViewModel by lazy { getViewModel { component.mainViewModel } }
+    private val viewModel: MainViewModel by lifecycleScope.viewModel(this)
     private lateinit var contentProductsAdapter: ContentProductsAdapter
     private lateinit var searchingProductsAdapter: SearchingProductsAdapter
     private lateinit var binding: ActivityMainBinding
@@ -38,7 +35,6 @@ class MainActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        component = app.component.plus(MainActivityModule())
         setContentView(binding.root)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -76,9 +72,18 @@ class MainActivity : FragmentActivity() {
     private fun updateUi(model: UiModel) = when (model) {
         is Searching -> searchingProductsAdapter.categories = model.categories.toMutableList()
         is LoadRemoteContent -> loadContentView(model.title, model.products)
-        is LoadLocalContent -> loadContentView(getString(R.string.product_main_local_title), model.products)
-        is Navigation -> startActivityForResult<DetailActivity>(CODE) { putExtra(PRODUCT, model.product.id) }
-        is Loading, EmptyState, ErrorState -> { /* BindingAdapterHandling */ }
+        is LoadLocalContent -> loadContentView(
+            getString(R.string.product_main_local_title),
+            model.products
+        )
+        is Navigation -> startActivityForResult<DetailActivity>(CODE) {
+            putExtra(
+                PRODUCT,
+                model.product.id
+            )
+        }
+        is Loading, EmptyState, ErrorState -> { /* BindingAdapterHandling */
+        }
     }
 
     private fun loadContentView(title: String, products: List<Product>) = with(binding) {

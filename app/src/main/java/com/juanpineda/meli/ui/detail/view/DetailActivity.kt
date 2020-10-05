@@ -8,14 +8,13 @@ import androidx.lifecycle.Observer
 import com.juanpineda.domain.Product
 import com.juanpineda.meli.R
 import com.juanpineda.meli.databinding.ActivityDetailBinding
-import com.juanpineda.meli.ui.common.app
-import com.juanpineda.meli.ui.common.getViewModel
 import com.juanpineda.meli.ui.common.loadContent
-import com.juanpineda.meli.ui.detail.DetailActivityComponent
-import com.juanpineda.meli.ui.detail.DetailActivityModule
 import com.juanpineda.meli.ui.detail.viewmodel.DetailViewModel
 import com.juanpineda.meli.ui.detail.viewmodel.DetailViewModel.UiModel.LoadDetailContent
 import com.juanpineda.meli.ui.detail.viewmodel.DetailViewModel.UiModel.LoadFavoriteContent
+import org.koin.androidx.scope.lifecycleScope
+import org.koin.androidx.viewmodel.scope.viewModel
+import org.koin.core.parameter.parametersOf
 
 class DetailActivity : AppCompatActivity() {
 
@@ -23,15 +22,15 @@ class DetailActivity : AppCompatActivity() {
         const val PRODUCT = "DetailActivity:product"
     }
 
-    private lateinit var component: DetailActivityComponent
-    private val viewModel by lazy { getViewModel { component.detaiViewModel } }
+    private val viewModel: DetailViewModel by lifecycleScope.viewModel(this) {
+        parametersOf(intent.getStringExtra(PRODUCT) ?: "")
+    }
     private lateinit var binding: ActivityDetailBinding
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
-        component = app.component.plus(DetailActivityModule(intent.getStringExtra(PRODUCT) ?: ""))
         setContentView(binding.root)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

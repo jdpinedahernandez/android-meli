@@ -3,9 +3,10 @@ package com.juanpineda.meli.main
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.juanpineda.meli.*
-import com.juanpineda.meli.ui.main.MainActivityModule
 import com.juanpineda.meli.ui.main.viewmodel.MainViewModel
 import com.juanpineda.meli.ui.main.viewmodel.MainViewModel.UiModel.*
+import com.juanpineda.usecases.GetPredictiveCategory
+import com.juanpineda.usecases.GetProducts
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -14,12 +15,14 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.dsl.module
+import org.koin.test.get
 import org.mockito.ArgumentMatchers
 import org.mockito.junit.MockitoJUnitRunner
-
+import org.koin.test.AutoCloseKoinTest
 
 @RunWith(MockitoJUnitRunner::class)
-class MainIntegrationTest {
+class MainIntegrationTest :AutoCloseKoinTest(){
 
     @ExperimentalCoroutinesApi
     @get:Rule
@@ -29,16 +32,17 @@ class MainIntegrationTest {
     val rule = InstantTaskExecutorRule()
 
     private val observer: Observer<MainViewModel.UiModel> = mock()
-    private val component: TestComponent = DaggerTestComponent.factory().create()
-    private lateinit var localDataSource: FakeLocalDataSource
-    private lateinit var remoteDataSource: FakeRemoteDataSource
     private lateinit var vm: MainViewModel
 
     @Before
     fun setUp() {
-        vm = component.plus(MainActivityModule()).mainViewModel
-        localDataSource = component.localDataSource as FakeLocalDataSource
-        remoteDataSource = component.remoteDataSource as FakeRemoteDataSource
+        val vmModule = module {
+            factory { MainViewModel(get(), get()) }
+            factory { GetProducts(get()) }
+            factory { GetPredictiveCategory(get()) }
+        }
+        initMockedDi(vmModule)
+        vm = get()
     }
 
     @ExperimentalCoroutinesApi
