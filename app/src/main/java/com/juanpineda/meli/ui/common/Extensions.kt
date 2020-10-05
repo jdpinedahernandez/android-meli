@@ -89,7 +89,7 @@ fun ViewPager2.loadContent(list: List<String>) =
     apply {
         offscreenPageLimit = 1
         (getChildAt(0) as RecyclerView).apply {
-            context.getScreenWidth().div(6).let {
+            context.getScreenWidth().div(4).let {
                 setPadding(it, 0, it, 0)
                 clipToPadding = false
             }
