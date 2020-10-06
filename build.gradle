@@ -27,7 +27,6 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -77,6 +76,7 @@ allprojects {
                 mockitoKotlin : "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitokotlin_version",
                 mockitoInline : 'org.mockito:mockito-inline:2.28.2',
                 coroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version",
+                daggerTest: "com.google.dagger:dagger-compiler:$dagger_version",
         ]
 
         androidxTestLibs = [
@@ -87,13 +87,18 @@ allprojects {
                 daggerTest: "com.google.dagger:dagger-compiler:$dagger_version"
         ]
 
+        kaptAndroidTestLibs = [
+                daggerTest: "com.google.dagger:dagger-compiler:$dagger_version"
+        ]
+
         androidTestLibs = [
-                testRunner   : 'androidx.test:runner:1.2.0',
-                espresso     : "androidx.test.espresso:espresso-core:$test_espresso_version",
-                rules        : 'androidx.test:rules:1.2.0',
-                extJunit     : "androidx.test.ext:junit-ktx:$test_junit_version",
-                mockWebServer: 'com.squareup.okhttp3:mockwebserver:4.2.1',
-                okhttpIdling : 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
+                testRunner    : 'androidx.test:runner:1.2.0',
+                espresso      : "androidx.test.espresso:espresso-core:$test_espresso_version",
+                rules         : 'androidx.test:rules:1.2.0',
+                extJunit      : "androidx.test.ext:junit-ktx:$test_junit_version",
+                mockWebServer : 'com.squareup.okhttp3:mockwebserver:4.2.1',
+                okhttpIdling  : 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0',
+                expresoContrib: "androidx.test.espresso:espresso-contrib:$test_espresso_version"
         ]
     }
 }

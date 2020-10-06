@@ -12,7 +12,7 @@ class RoomDataSource(db: ProductDatabase) : LocalDataSource {
     private val productDao = db.productDao()
 
     override suspend fun isEmpty(): Boolean =
-            withContext(Dispatchers.IO) { productDao.productCount() <= 0 }
+        withContext(Dispatchers.IO) { productDao.productCount() <= 0 }
 
     override suspend fun saveProducts(products: List<Product>) {
         withContext(Dispatchers.IO) { productDao.insertProducts(products.map { it.toRoomProduct() }) }
@@ -26,12 +26,13 @@ class RoomDataSource(db: ProductDatabase) : LocalDataSource {
         productDao.getAll().map { it.toDomainProduct() }
     }
 
-    override suspend fun getProductsByTitle(title: String): List<Product> = withContext(Dispatchers.IO) {
-        productDao.getProductByTitle(title).map { it.toDomainProduct() }
-    }
+    override suspend fun getProductsByTitle(title: String): List<Product> =
+        withContext(Dispatchers.IO) {
+            productDao.getProductByTitle(title).map { it.toDomainProduct() }
+        }
 
     override suspend fun findById(id: String): Product = withContext(Dispatchers.IO) {
-        productDao.findById(id).toDomainProduct()
+        productDao.findById(id)?.toDomainProduct() ?: Product()
     }
 
     override suspend fun isProductIsExist(id: String): Boolean = withContext(Dispatchers.IO) {
