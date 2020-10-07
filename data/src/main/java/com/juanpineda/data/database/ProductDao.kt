@@ -12,7 +12,7 @@ interface ProductDao {
     fun getProductByTitle(title: String): List<Product>
 
     @Query("SELECT * FROM Product WHERE id = :id")
-    fun findById(id: String): Product
+    fun findById(id: String): Product?
 
     @Query("SELECT COUNT(id) FROM Product")
     fun productCount(): Int

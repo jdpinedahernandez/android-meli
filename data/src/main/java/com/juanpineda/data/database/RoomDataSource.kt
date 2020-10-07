@@ -31,7 +31,7 @@ class RoomDataSource(db: ProductDatabase) : LocalDataSource {
     }
 
     override suspend fun findById(id: String): Product = withContext(Dispatchers.IO) {
-        productDao.findById(id).toDomainProduct()
+        productDao.findById(id)?.toDomainProduct() ?: Product()
     }
 
     override suspend fun isProductIsExist(id: String): Boolean = withContext(Dispatchers.IO) {
