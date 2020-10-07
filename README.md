@@ -1,3 +1,3 @@
 # Meli
 
-![](gif_app)
+![](gif_app.gif)
