@@ -120,7 +120,24 @@ val productDetailByCategory = """
   "thumbnail_id": "894149-MCO42738104857_072020",
   "thumbnail": "http://mco-s2-p.mlstatic.com/894149-MCO42738104857_072020-I.jpg",
   "secure_thumbnail": "https://mco-s2-p.mlstatic.com/894149-MCO42738104857_072020-I.jpg",
-  "pictures": [],
+  "pictures": [
+    {
+          "id": "894149-MCO42738104857_072020",
+          "url": "http://mco-s2-p.mlstatic.com/894149-MCO42738104857_072020-O.jpg",
+          "secure_url": "https://mco-s2-p.mlstatic.com/894149-MCO42738104857_072020-O.jpg",
+          "size": "500x394",
+          "max_size": "1648x1299",
+          "quality": ""
+        },
+        {
+          "id": "955521-MCO42738104858_072020",
+          "url": "http://mco-s2-p.mlstatic.com/955521-MCO42738104858_072020-O.jpg",
+          "secure_url": "https://mco-s2-p.mlstatic.com/955521-MCO42738104858_072020-O.jpg",
+          "size": "500x370",
+          "max_size": "1500x1111",
+          "quality": ""
+        }
+    ],
   "video_id": null,
   "descriptions": [],
   "accepts_mercadopago": true,

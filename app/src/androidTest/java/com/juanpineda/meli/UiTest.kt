@@ -52,7 +52,7 @@ class UiTest {
     }
 
     @Test
-    fun clickACategoryShowAssociatesProductsAndNavigateToProductDetailWithNoPictures() {
+    fun clickACategoryShowAssociatesProductsAndNavigateToProductDetailValidateDetailTitle() {
         mockWebServer.enqueue(
             MockResponse()
                 .setResponseCode(200)
@@ -91,7 +91,6 @@ class UiTest {
         onView(withId(R.id.productDetailSummary))
             .check(matches(withText("B&o Play De Bang & Olufsen A2")))
     }
-
 
     @After
     fun tearDown() {
