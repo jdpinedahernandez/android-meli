@@ -40,17 +40,13 @@ class DetailActivity : AppCompatActivity() {
 
     private fun updateUi(model: DetailViewModel.UiModel) = when (model) {
         is LoadDetailContent -> loadContentView(model.product)
-        is LoadFavoriteContent -> loadDetailFavoriteView(model.product)
+        is LoadFavoriteContent -> loadContentView(model.product)
     }
 
-    private fun loadContentView(product: Product) = with(product) {
-        binding.productDetailSummary.text = product.title
-        binding.viewPagerProducts.loadContent(pictures)
-        loadDetailFavoriteView(this)
-    }
-
-    private fun loadDetailFavoriteView(product: Product) = with(product) {
-        binding.productDetailInfo.setProduct(this)
-        binding.productDetailFavorite.setImageDrawable(getDrawable(if (favorite) R.drawable.ic_favorite_on else R.drawable.ic_favorite_off))
+    private fun loadContentView(product: Product) = with(binding) {
+        productDetailSummary.text = product.title
+        viewPagerProducts.loadContent(product.pictures)
+        productDetailInfo.setProduct(product)
+        productDetailFavorite.setImageDrawable(getDrawable(if (product.favorite) R.drawable.ic_favorite_on else R.drawable.ic_favorite_off))
     }
 }

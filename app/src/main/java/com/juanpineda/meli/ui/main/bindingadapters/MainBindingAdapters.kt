@@ -32,11 +32,11 @@ fun View.uiContent(uiState: UiModel?) {
 @BindingAdapter("uiNoData")
 fun TextView.uiNoData(uiState: UiModel?) {
     visibility = when (uiState) {
-        is EmptyState -> {
+        EmptyState -> {
             text = context.getText(R.string.product_main_empty_products)
             VISIBLE
         }
-        is ErrorState -> {
+        ErrorState -> {
             text = context.getText(R.string.product_main_error)
             VISIBLE
         }

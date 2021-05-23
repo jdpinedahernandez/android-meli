@@ -2,17 +2,20 @@ package com.juanpineda.meli.ui.main.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.juanpineda.data.server.result.onError
+import com.juanpineda.data.server.result.onSuccess
 import com.juanpineda.domain.Category
 import com.juanpineda.domain.Product
 import com.juanpineda.meli.ui.common.ScopedViewModel
-import com.juanpineda.result.onError
-import com.juanpineda.result.onSuccess
 import com.juanpineda.usecases.GetPredictiveCategory
 import com.juanpineda.usecases.GetProducts
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val getProducts: GetProducts, private val getPredictiveCategory: GetPredictiveCategory) : ScopedViewModel() {
+class MainViewModel(
+    private val getProducts: GetProducts,
+    private val getPredictiveCategory: GetPredictiveCategory
+) : ScopedViewModel() {
 
     private val _model = MutableLiveData<UiModel>()
     val model: LiveData<UiModel>
@@ -37,9 +40,9 @@ class MainViewModel(private val getProducts: GetProducts, private val getPredict
     }
 
     fun searching(query: String) {
-        if (query.isNotEmpty())
             launch {
-                getPredictiveCategory.invoke(query).onSuccess { _model.value = UiModel.Searching(it) }
+                getPredictiveCategory.invoke(query)
+                    .onSuccess { _model.value = UiModel.Searching(it) }
             }
     }
 
@@ -48,8 +51,8 @@ class MainViewModel(private val getProducts: GetProducts, private val getPredict
         searchJob = launch {
             _model.value = UiModel.Loading
             getProducts.byCategory(category.id)
-                    .onSuccess { _model.value = UiModel.LoadRemoteContent(it, category.name) }
-                    .onError { _model.value = UiModel.ErrorState }
+                .onSuccess { _model.value = UiModel.LoadRemoteContent(it, category.name) }
+                .onError { _model.value = UiModel.ErrorState }
         }
     }
 
@@ -57,8 +60,8 @@ class MainViewModel(private val getProducts: GetProducts, private val getPredict
         launch {
             _model.value = UiModel.Loading
             getProducts.byName(query)
-                    .onSuccess { _model.value = UiModel.LoadRemoteContent((it), query) }
-                    .onError { _model.value = UiModel.ErrorState }
+                .onSuccess { _model.value = UiModel.LoadRemoteContent((it), query) }
+                .onError { _model.value = UiModel.ErrorState }
         }
     }
 

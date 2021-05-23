@@ -1,10 +1,13 @@
 package com.juanpineda.usecases
 
 import com.juanpineda.data.repository.ProductsRepository
+import com.juanpineda.data.server.result.ErrorResponse
+import com.juanpineda.data.server.result.error.Failure.NetworkConnection
+import com.juanpineda.data.server.result.error.Failure.UnknownException
+import com.juanpineda.data.server.result.SuccessResponse
+import com.juanpineda.data.server.result.onError
+import com.juanpineda.data.server.result.onSuccess
 import com.juanpineda.domain.Category
-import com.juanpineda.result.*
-import com.juanpineda.result.Failure.NetworkConnection
-import com.juanpineda.result.Failure.UnknownException
 import com.nhaarman.mockitokotlin2.given
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -54,7 +57,7 @@ class GetPredictiveCategoryTest {
             // when
             sut.invoke(ArgumentMatchers.anyString()).onError {
                 //then
-                assertEquals(error, it.exception)
+                assertEquals(error, failure)
             }
         }
     }
@@ -69,7 +72,7 @@ class GetPredictiveCategoryTest {
             // when
             sut.invoke(ArgumentMatchers.anyString()).onError {
                 //then
-                assertEquals(error, it.exception)
+                assertEquals(error, failure)
             }
         }
     }

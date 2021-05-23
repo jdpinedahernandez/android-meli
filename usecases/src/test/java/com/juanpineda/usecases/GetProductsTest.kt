@@ -1,13 +1,10 @@
 package com.juanpineda.usecases
 
 import com.juanpineda.data.repository.ProductsRepository
+import com.juanpineda.data.server.result.*
+import com.juanpineda.data.server.result.error.Failure.NetworkConnection
+import com.juanpineda.data.server.result.error.Failure.UnknownException
 import com.juanpineda.domain.Product
-import com.juanpineda.result.ErrorResponse
-import com.juanpineda.result.Failure.NetworkConnection
-import com.juanpineda.result.Failure.UnknownException
-import com.juanpineda.result.SuccessResponse
-import com.juanpineda.result.onError
-import com.juanpineda.result.onSuccess
 import com.nhaarman.mockitokotlin2.given
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -71,7 +68,7 @@ class GetProductsTest {
             // when
             sut.byCategory(ArgumentMatchers.anyString()).onError {
                 //then
-                assertEquals(error, it.exception)
+                assertEquals(error, failure)
             }
         }
     }
@@ -86,7 +83,7 @@ class GetProductsTest {
             // when
             sut.byCategory(ArgumentMatchers.anyString()).onError {
                 //then
-                assertEquals(error, it.exception)
+                assertEquals(error, failure)
             }
         }
     }
@@ -116,7 +113,7 @@ class GetProductsTest {
             // when
             sut.byName(ArgumentMatchers.anyString()).onError {
                 //then
-                assertEquals(error, it.exception)
+                assertEquals(error, failure)
             }
         }
     }
@@ -131,7 +128,7 @@ class GetProductsTest {
             // when
             sut.byName(ArgumentMatchers.anyString()).onError {
                 //then
-                assertEquals(error, it.exception)
+                assertEquals(error, failure)
             }
         }
     }
