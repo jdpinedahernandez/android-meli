@@ -1,8 +1,15 @@
 package com.juanpineda.data
 
 import com.juanpineda.data.repository.ProductsRepository
-import com.juanpineda.data.server.result.*
+import com.juanpineda.data.server.MeliDb
+import com.juanpineda.data.server.result.ErrorResponse
+import com.juanpineda.data.server.result.SuccessResponse
+import com.juanpineda.data.server.result.error.entity.BAD_REQUEST
+import com.juanpineda.data.server.result.error.entity.ErrorType.INVALID_QUERY
 import com.juanpineda.data.server.result.error.Failure
+import com.juanpineda.data.server.result.error.ServerFailure.InvalidValueForQueryParameter
+import com.juanpineda.data.server.result.onError
+import com.juanpineda.data.server.result.onSuccess
 import com.juanpineda.data.source.LocalDataSource
 import com.juanpineda.data.source.RemoteDataSource
 import com.juanpineda.domain.Category
@@ -26,7 +33,7 @@ class ProductRepositoryTest {
     @Mock
     lateinit var remoteDataSource: RemoteDataSource
 
-    lateinit var productsRepository: ProductsRepository
+    private lateinit var productsRepository: ProductsRepository
 
     @Before
     fun setUp() {
@@ -52,7 +59,7 @@ class ProductRepositoryTest {
     }
 
     @Test
-    fun `getPredictiveCategory return error`() {
+    fun `getPredictiveCategory return generic error`() {
         runBlocking {
             // given
             val error = Failure.UnknownException
@@ -63,6 +70,24 @@ class ProductRepositoryTest {
             productsRepository.getPredictiveCategory(ArgumentMatchers.anyString()).onError {
                 // then
                 assertEquals(error, failure)
+            }
+
+        }
+    }
+
+    @Test
+    fun `getPredictiveCategory return invalid query error`() {
+        runBlocking {
+            // given
+            val httpException = buildHttpExceptionMock(INVALID_QUERY, BAD_REQUEST)
+            val expectedError = InvalidValueForQueryParameter
+            given(remoteDataSource.getPredictiveCategory(ArgumentMatchers.anyString())).willReturn(
+                ErrorResponse(Failure.analyzeException(httpException))
+            )
+            // when
+            productsRepository.getPredictiveCategory(ArgumentMatchers.anyString()).onError {
+                // then
+                assertEquals(expectedError, failure)
             }
 
         }
@@ -87,7 +112,7 @@ class ProductRepositoryTest {
     }
 
     @Test
-    fun `getProductsByCategory return error`() {
+    fun `getProductsByCategory return general error`() {
         runBlocking {
             // given
             val error = Failure.UnknownException
@@ -98,6 +123,24 @@ class ProductRepositoryTest {
             productsRepository.getProductsByCategory(ArgumentMatchers.anyString()).onError {
                 // then
                 assertEquals(error, failure)
+            }
+
+        }
+    }
+
+    @Test
+    fun `getProductsByCategory return invalid query error`() {
+        runBlocking {
+            // given
+            val httpException = buildHttpExceptionMock(INVALID_QUERY, BAD_REQUEST)
+            val expectedError = InvalidValueForQueryParameter
+            given(remoteDataSource.getProductsByCategory(ArgumentMatchers.anyString())).willReturn(
+                ErrorResponse(Failure.analyzeException(httpException))
+            )
+            // when
+            productsRepository.getProductsByCategory(ArgumentMatchers.anyString()).onError {
+                // then
+                assertEquals(expectedError, failure)
             }
 
         }
@@ -123,7 +166,7 @@ class ProductRepositoryTest {
     }
 
     @Test
-    fun `getProductsByName return error`() {
+    fun `getProductsByName return general error`() {
         runBlocking {
             // given
             val error = Failure.UnknownException
@@ -134,6 +177,24 @@ class ProductRepositoryTest {
             productsRepository.getProductsByName(ArgumentMatchers.anyString()).onError {
                 // then
                 assertEquals(error, failure)
+            }
+
+        }
+    }
+
+    @Test
+    fun `getProductsByName return invalid query error`() {
+        runBlocking {
+            // given
+            val httpException = buildHttpExceptionMock(INVALID_QUERY, BAD_REQUEST)
+            val expectedError = InvalidValueForQueryParameter
+            given(remoteDataSource.getProductsByName(ArgumentMatchers.anyString())).willReturn(
+                ErrorResponse(Failure.analyzeException(httpException))
+            )
+            // when
+            productsRepository.getProductsByName(ArgumentMatchers.anyString()).onError {
+                // then
+                assertEquals(expectedError, failure)
             }
 
         }

@@ -40,6 +40,7 @@ class MainViewModel(
     }
 
     fun searching(query: String) {
+        if (query.isNotEmpty())
             launch {
                 getPredictiveCategory.invoke(query)
                     .onSuccess { _model.value = UiModel.Searching(it) }

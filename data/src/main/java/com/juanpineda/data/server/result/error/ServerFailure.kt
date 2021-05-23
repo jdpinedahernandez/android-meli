@@ -1,7 +1,9 @@
 package com.juanpineda.data.server.result.error
 
 import com.google.gson.Gson
-import com.juanpineda.data.server.result.error.ErrorType.INVALID_QUERY
+import com.juanpineda.data.server.result.error.entity.ErrorType.INVALID_QUERY
+import com.juanpineda.data.server.result.error.entity.BAD_REQUEST
+import com.juanpineda.data.server.result.error.entity.ErrorServiceResponse
 import retrofit2.HttpException
 
 class ServerFailure : Failure.FeatureFailure() {
