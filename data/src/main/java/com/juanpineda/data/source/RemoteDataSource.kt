@@ -2,7 +2,7 @@ package com.juanpineda.data.source
 
 import com.juanpineda.domain.Category
 import com.juanpineda.domain.Product
-import com.juanpineda.result.ResultHandler
+import com.juanpineda.data.server.result.ResultHandler
 
 interface RemoteDataSource {
     suspend fun getPredictiveCategory(query: String): ResultHandler<List<Category>>

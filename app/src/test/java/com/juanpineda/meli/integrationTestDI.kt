@@ -6,8 +6,8 @@ import com.juanpineda.data.source.RemoteDataSource
 import com.juanpineda.domain.Category
 import com.juanpineda.domain.Product
 import com.juanpineda.meli.di.MeliComponent
-import com.juanpineda.result.ResultHandler
-import com.juanpineda.result.SuccessResponse
+import com.juanpineda.data.server.result.ResultHandler
+import com.juanpineda.data.server.result.SuccessResponse
 import dagger.Component
 import dagger.Module
 import dagger.Provides

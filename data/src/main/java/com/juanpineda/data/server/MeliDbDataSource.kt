@@ -1,11 +1,11 @@
 package com.juanpineda.data.server
 
+import com.juanpineda.data.server.result.*
+import com.juanpineda.data.server.result.error.Failure
 import com.juanpineda.data.source.RemoteDataSource
 import com.juanpineda.data.toDomainCategory
 import com.juanpineda.data.toDomainProduct
-import com.juanpineda.result.ErrorResponse
-import com.juanpineda.result.Failure
-import com.juanpineda.result.SuccessResponse
+import com.juanpineda.domain.Category
 
 class MeliDbDataSource(private val meliDb: MeliDb) : RemoteDataSource {
 

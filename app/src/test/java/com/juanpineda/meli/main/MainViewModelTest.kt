@@ -2,13 +2,13 @@ package com.juanpineda.meli.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.juanpineda.data.server.result.ErrorResponse
+import com.juanpineda.data.server.result.error.Failure.NetworkConnection
+import com.juanpineda.data.server.result.error.Failure.UnknownException
+import com.juanpineda.data.server.result.SuccessResponse
 import com.juanpineda.meli.*
 import com.juanpineda.meli.ui.main.viewmodel.MainViewModel
 import com.juanpineda.meli.ui.main.viewmodel.MainViewModel.UiModel.*
-import com.juanpineda.result.ErrorResponse
-import com.juanpineda.result.Failure.NetworkConnection
-import com.juanpineda.result.Failure.UnknownException
-import com.juanpineda.result.SuccessResponse
 import com.juanpineda.usecases.GetPredictiveCategory
 import com.juanpineda.usecases.GetProducts
 import com.nhaarman.mockitokotlin2.given
@@ -51,66 +51,96 @@ class DetailViewModelTest {
     }
 
     @Test
-    fun `searching categories with not empty query return products`() = coroutinesTestRule.testDispatcher.runBlockingTest {
-        // given
-        given(getProducts.invoke()).willReturn(defaultFakeProducts)
-        given(getPredictiveCategory.invoke(ArgumentMatchers.anyString())).willReturn(SuccessResponse(defaultFakeCategories))
-        sut.model.observeForever(observer)
-        // when
-        sut.searching("vacaciones")
-        // then
-        verify(observer).onChanged(refEq(Searching(defaultFakeCategories)))
-    }
+    fun `searching categories with not empty query return products`() =
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            // given
+            given(getProducts.invoke()).willReturn(defaultFakeProducts)
+            given(getPredictiveCategory.invoke(ArgumentMatchers.anyString())).willReturn(
+                SuccessResponse(defaultFakeCategories)
+            )
+            sut.model.observeForever(observer)
+            // when
+            sut.searching("vacaciones")
+            // then
+            verify(observer).onChanged(refEq(Searching(defaultFakeCategories)))
+        }
 
     @Test
-    fun `endSearch products by category return products`() = coroutinesTestRule.testDispatcher.runBlockingTest {
-        // given
-        given(getProducts.invoke()).willReturn(defaultFakeProducts)
-        given(getProducts.byCategory(ArgumentMatchers.anyString())).willReturn(SuccessResponse(defaultFakeProducts))
-        sut.model.observeForever(observer)
-        // when
-        sut.endSearchByCategory(mockedCategory)
-        // then
-        verify(observer).onChanged(refEq(LoadRemoteContent(defaultFakeProducts, mockedCategory.name)))
-    }
+    fun `endSearch products by category return products`() =
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            // given
+            given(getProducts.invoke()).willReturn(defaultFakeProducts)
+            given(getProducts.byCategory(ArgumentMatchers.anyString())).willReturn(
+                SuccessResponse(
+                    defaultFakeProducts
+                )
+            )
+            sut.model.observeForever(observer)
+            // when
+            sut.endSearchByCategory(mockedCategory)
+            // then
+            verify(observer).onChanged(
+                refEq(
+                    LoadRemoteContent(
+                        defaultFakeProducts,
+                        mockedCategory.name
+                    )
+                )
+            )
+        }
 
     @Test
-    fun `endSearch products by category return error`() = coroutinesTestRule.testDispatcher.runBlockingTest {
-        // given
-        given(getProducts.invoke()).willReturn(defaultFakeProducts)
-        given(getProducts.byCategory(ArgumentMatchers.anyString())).willReturn(ErrorResponse(UnknownException))
-        sut.model.observeForever(observer)
-        // when
-        sut.endSearchByCategory(mockedCategory)
-        // then
-        verify(observer).onChanged(refEq(ErrorState))
-    }
+    fun `endSearch products by category return error`() =
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            // given
+            given(getProducts.invoke()).willReturn(defaultFakeProducts)
+            given(getProducts.byCategory(ArgumentMatchers.anyString())).willReturn(
+                ErrorResponse(
+                    UnknownException
+                )
+            )
+            sut.model.observeForever(observer)
+            // when
+            sut.endSearchByCategory(mockedCategory)
+            // then
+            verify(observer).onChanged(refEq(ErrorState))
+        }
 
     @Test
-    fun `endSearchByName products return products`() = coroutinesTestRule.testDispatcher.runBlockingTest {
-        // given
-        val nameToSearch = "celulares"
-        given(getProducts.invoke()).willReturn(emptyList())
-        given(getProducts.byName(ArgumentMatchers.anyString())).willReturn(SuccessResponse(defaultFakeProducts))
-        sut.model.observeForever(observer)
-        // when
-        sut.endSearchByName(nameToSearch)
-        // then
-        verify(observer).onChanged(refEq(LoadRemoteContent(defaultFakeProducts, nameToSearch)))
-    }
+    fun `endSearchByName products return products`() =
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            // given
+            val nameToSearch = "celulares"
+            given(getProducts.invoke()).willReturn(emptyList())
+            given(getProducts.byName(ArgumentMatchers.anyString())).willReturn(
+                SuccessResponse(
+                    defaultFakeProducts
+                )
+            )
+            sut.model.observeForever(observer)
+            // when
+            sut.endSearchByName(nameToSearch)
+            // then
+            verify(observer).onChanged(refEq(LoadRemoteContent(defaultFakeProducts, nameToSearch)))
+        }
 
     @Test
-    fun `endSearchByName products return error`() = coroutinesTestRule.testDispatcher.runBlockingTest {
-        // given
-        val nameToSearch = "celulares"
-        given(getProducts.invoke()).willReturn(emptyList())
-        given(getProducts.byName(ArgumentMatchers.anyString())).willReturn(ErrorResponse(NetworkConnection()))
-        sut.model.observeForever(observer)
-        // when
-        sut.endSearchByName(nameToSearch)
-        // then
-        verify(observer).onChanged(refEq(ErrorState))
-    }
+    fun `endSearchByName products return error`() =
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            // given
+            val nameToSearch = "celulares"
+            given(getProducts.invoke()).willReturn(emptyList())
+            given(getProducts.byName(ArgumentMatchers.anyString())).willReturn(
+                ErrorResponse(
+                    NetworkConnection()
+                )
+            )
+            sut.model.observeForever(observer)
+            // when
+            sut.endSearchByName(nameToSearch)
+            // then
+            verify(observer).onChanged(refEq(ErrorState))
+        }
 
     @Test
     fun `getLocalProducts return products`() = coroutinesTestRule.testDispatcher.runBlockingTest {

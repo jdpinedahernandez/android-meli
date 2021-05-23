@@ -1,11 +1,12 @@
 package com.juanpineda.data
 
 import com.juanpineda.data.repository.ProductsRepository
+import com.juanpineda.data.server.result.*
+import com.juanpineda.data.server.result.error.Failure
 import com.juanpineda.data.source.LocalDataSource
 import com.juanpineda.data.source.RemoteDataSource
 import com.juanpineda.domain.Category
 import com.juanpineda.domain.Product
-import com.juanpineda.result.*
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.verify
 import junit.framework.Assert.assertEquals
@@ -61,7 +62,7 @@ class ProductRepositoryTest {
             // when
             productsRepository.getPredictiveCategory(ArgumentMatchers.anyString()).onError {
                 // then
-                assertEquals(error, it.exception)
+                assertEquals(error, failure)
             }
 
         }
@@ -96,7 +97,7 @@ class ProductRepositoryTest {
             // when
             productsRepository.getProductsByCategory(ArgumentMatchers.anyString()).onError {
                 // then
-                assertEquals(error, it.exception)
+                assertEquals(error, failure)
             }
 
         }
@@ -132,7 +133,7 @@ class ProductRepositoryTest {
             // when
             productsRepository.getProductsByName(ArgumentMatchers.anyString()).onError {
                 // then
-                assertEquals(error, it.exception)
+                assertEquals(error, failure)
             }
 
         }

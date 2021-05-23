@@ -4,8 +4,8 @@ import com.juanpineda.data.source.LocalDataSource
 import com.juanpineda.data.source.RemoteDataSource
 import com.juanpineda.domain.Category
 import com.juanpineda.domain.Product
-import com.juanpineda.result.ResultHandler
-import com.juanpineda.result.onSuccess
+import com.juanpineda.data.server.result.ResultHandler
+import com.juanpineda.data.server.result.onSuccess
 
 class ProductsRepository(
         private val localDataSource: LocalDataSource,
