@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.juanpineda.domain.Product
 import com.juanpineda.meli.databinding.FragmentProductsBinding
 import com.juanpineda.meli.ui.main.adapters.ContentProductsAdapter
+import com.juanpineda.meli.ui.modules.home.search.view.SearchFragmentDirections
 
 class ProductsFragment : Fragment() {
 
@@ -42,6 +44,10 @@ class ProductsFragment : Fragment() {
     }
 
     private fun goToDetailProduct(product: Product) {
-
+        findNavController().navigate(
+            ProductsFragmentDirections.actionProductsFragmentToProductDetailFragment(
+                product.id
+            )
+        )
     }
 }
