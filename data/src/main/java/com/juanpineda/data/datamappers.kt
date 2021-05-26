@@ -1,9 +1,10 @@
 package com.juanpineda.data
 
+import com.juanpineda.data.server.category.MeliDbCategoryResult
+import com.juanpineda.data.server.category.MeliDbPredictiveCategoryResult
 import com.juanpineda.domain.Category
 import com.juanpineda.domain.Product
 import com.juanpineda.data.database.Product as DomainProduct
-import com.juanpineda.data.server.category.MeliDbCategoryResult as ServerCategory
 import com.juanpineda.data.server.product.Product as ServerProduct
 import com.juanpineda.data.server.productdetail.MeliDbProductDetailResult as ServerProductDetail
 import com.juanpineda.data.server.productdetail.Picture as ServerProductDetailPicture
@@ -63,8 +64,14 @@ fun ServerProductDetail.toDomainProduct(): Product =
 
 fun ServerProductDetailPicture.toDomainProductPicture() = secureUrl
 
-fun ServerCategory.toDomainCategory(): Category =
+fun MeliDbPredictiveCategoryResult.toDomainCategory(): Category =
     Category(
         categoryId,
         categoryName
+    )
+
+fun MeliDbCategoryResult.toDomainCategory(): Category =
+    Category(
+        id,
+        name
     )

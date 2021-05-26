@@ -6,6 +6,7 @@ import com.juanpineda.data.server.result.ResultHandler
 
 interface RemoteDataSource {
     suspend fun getPredictiveCategory(query: String): ResultHandler<List<Category>>
+    suspend fun getCategories(): ResultHandler<List<Category>>
     suspend fun getProductsByCategory(query: String): ResultHandler<List<Product>>
     suspend fun getProductsByName(query: String): ResultHandler<List<Product>>
     suspend fun getProductDetail(itemId: String): ResultHandler<Product>

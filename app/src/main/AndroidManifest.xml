@@ -18,7 +18,7 @@
             android:configChanges="orientation"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.juanpineda.meli.ui.main.view.MainActivity"
+            android:name="com.juanpineda.meli.ui.modules.home.activity.view.HomeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
