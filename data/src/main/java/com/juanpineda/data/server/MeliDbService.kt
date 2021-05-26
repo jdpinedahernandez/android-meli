@@ -1,6 +1,7 @@
 package com.juanpineda.data.server
 
 import com.juanpineda.data.server.category.MeliDbCategoryResult
+import com.juanpineda.data.server.category.MeliDbPredictiveCategoryResult
 import com.juanpineda.data.server.product.MeliDbProductResult
 import com.juanpineda.data.server.productdetail.MeliDbProductDetailResult
 import retrofit2.http.GET
@@ -11,7 +12,10 @@ interface MeliDbService {
     @GET("/sites/MCO/domain_discovery/search")
     suspend fun getPredictiveCategoryAsync(
         @Query("q") query: String
-    ): List<MeliDbCategoryResult>
+    ): List<MeliDbPredictiveCategoryResult>
+
+    @GET("/sites/MCO/categories")
+    suspend fun getCategoriesAsync(): List<MeliDbCategoryResult>
 
     @GET("sites/MCO/search")
     suspend fun getProductsByCategoryAsync(

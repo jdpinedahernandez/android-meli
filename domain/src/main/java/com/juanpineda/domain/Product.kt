@@ -1,5 +1,9 @@
 package com.juanpineda.domain
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Product(
         val id: String = "",
         val title: String = "",
@@ -12,4 +16,4 @@ data class Product(
         val favorite: Boolean = false,
         val warranty: String = "",
         val currencyId: String = ""
-)
+) : Parcelable

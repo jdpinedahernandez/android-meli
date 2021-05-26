@@ -16,6 +16,13 @@ class MeliDbDataSource(private val meliDb: MeliDb) : RemoteDataSource {
                 ErrorResponse(Failure.analyzeException(e))
             }
 
+    override suspend fun getCategories(): ResultHandler<List<Category>> =
+        try {
+            SuccessResponse(meliDb.service.getCategoriesAsync().map { it.toDomainCategory() })
+        } catch (e: Exception) {
+            ErrorResponse(Failure.analyzeException(e))
+        }
+
     override suspend fun getProductsByCategory(query: String) =
             try {
                 SuccessResponse(meliDb.service.getProductsByCategoryAsync(query).results.map { it.toDomainProduct() })

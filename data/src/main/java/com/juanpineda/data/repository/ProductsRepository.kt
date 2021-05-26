@@ -14,6 +14,8 @@ class ProductsRepository(
 
     suspend fun getPredictiveCategory(query: String): ResultHandler<List<Category>> = remoteDataSource.getPredictiveCategory(query)
 
+    suspend fun getCategories(): ResultHandler<List<Category>> = remoteDataSource.getCategories()
+
     suspend fun getProductsByCategory(query: String): ResultHandler<List<Product>> = remoteDataSource.getProductsByCategory(query)
 
     suspend fun getProductsByName(query: String): ResultHandler<List<Product>> = remoteDataSource.getProductsByName(query)
