@@ -86,6 +86,7 @@
             android:layout_height="wrap_content"
             android:src="@{product.favorite ? @drawable/ic_favorite_on :@drawable/ic_favorite_off}"
             android:tint="@color/colorAccent"
+            android:visibility="gone"
             android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"

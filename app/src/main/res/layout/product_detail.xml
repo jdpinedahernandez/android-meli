@@ -109,7 +109,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:onClick="@{() -> viewModel.onFavoriteClicked()}"
             android:src="@drawable/ic_favorite_off"
             app:layout_anchor="@id/appBarLayout"
             app:layout_anchorGravity="bottom|end" />

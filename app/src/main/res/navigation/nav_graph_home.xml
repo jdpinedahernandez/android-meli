@@ -22,6 +22,18 @@
         <argument
             android:name="products"
             app:argType="com.juanpineda.domain.Product[]" />
+        <action
+            android:id="@+id/action_productsFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.juanpineda.meli.ui.modules.home.productdetail.view.ProductDetailFragment"
+        android:label="ProductDetailFragment"
+        tools:layout="@layout/product_detail">
+        <argument
+            android:name="productId"
+            app:argType="string" />
     </fragment>
 
 </navigation>
