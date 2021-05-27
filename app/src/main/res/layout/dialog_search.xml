@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_bottom_dialog_cut"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/text_dialog_toolbar_title"
+            style="@style/Text2.Normal.Bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:text="Más categorías"
+            android:textColor="@color/ui_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/text_dialog_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="29dp"
+            android:paddingStart="20dp"
+            android:paddingBottom="20dp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/text_favorite_button"
+            style="@style/Text2.Normal.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/shp_bg_list_item"
+            android:drawableStart="@drawable/ic_favorite_off"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="Favoritos"
+            android:textColor="@color/ui_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/text_viewed_products_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_dialog_toolbar_title" />
+
+        <TextView
+            android:id="@+id/text_viewed_products_button"
+            style="@style/Text2.Normal.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shp_bg_list_item"
+            android:drawableStart="@drawable/ic_favorite_on"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="Vistos   "
+            android:textColor="@color/ui_white"
+            app:layout_constraintBottom_toBottomOf="@+id/text_favorite_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/text_dialog_close"
+            app:layout_constraintTop_toTopOf="@+id/text_favorite_button"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

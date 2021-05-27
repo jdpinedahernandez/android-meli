@@ -7,6 +7,7 @@ import com.juanpineda.domain.Product
 import com.juanpineda.meli.ui.common.ScopedViewModel
 import com.juanpineda.meli.ui.common.SingleLiveEvent
 import com.juanpineda.meli.ui.common.asLiveData
+import com.juanpineda.usecases.GetFavoriteProducts
 import com.juanpineda.usecases.GetPredictiveCategory
 import com.juanpineda.usecases.GetProducts
 import kotlinx.coroutines.Job
@@ -14,7 +15,8 @@ import kotlinx.coroutines.launch
 
 class SearchViewModel(
     private val getProducts: GetProducts,
-    private val getPredictiveCategory: GetPredictiveCategory
+    private val getPredictiveCategory: GetPredictiveCategory,
+    private val getFavoriteProducts: GetFavoriteProducts
 ) : ScopedViewModel() {
     private val _model = SingleLiveEvent<UiModel>()
     val model get() = _model.asLiveData()
@@ -80,8 +82,8 @@ class SearchViewModel(
         }
     }
 
-    fun onProductClicked(product: Product) {
-        _model.value = UiModel.Navigation(product)
+    fun getFavoriteProducts() = launch {
+        _model.value = UiModel.LoadLocalContent(getFavoriteProducts.invoke())
     }
 
     override fun onCleared() {
