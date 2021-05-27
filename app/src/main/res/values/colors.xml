@@ -7,7 +7,9 @@
     <color name="lightBackground">#E0E0E0</color>
     <color name="colorGray">#ffC4C6C6</color>
     <color name="colorWhiteLight">#f2f2f2</color>
+    <color name="transparent">#00000000</color>
 
     <color name="ui_secondary_normal">#2B3550</color>
+    <color name="ui_surfaces_backdrop">#232B40</color>
     <color name="ui_white">#FFFFFF</color>
 </resources>

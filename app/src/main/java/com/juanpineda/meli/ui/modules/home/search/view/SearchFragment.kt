@@ -20,6 +20,7 @@ import com.juanpineda.meli.ui.main.adapters.CategoriesAdapter
 import com.juanpineda.meli.ui.main.adapters.SearchingProductsAdapter
 import com.juanpineda.meli.ui.modules.home.search.SearchFragmentComponent
 import com.juanpineda.meli.ui.modules.home.search.SearchFragmentModule
+import com.juanpineda.meli.ui.modules.home.search.dialog.SearchDialogFragment
 import com.juanpineda.meli.ui.modules.home.search.model.BannerFactory
 import com.juanpineda.meli.ui.modules.home.search.viewmodel.SearchViewModel
 import com.juanpineda.meli.ui.modules.home.search.viewmodel.SearchViewModel.UiModel.*
@@ -82,12 +83,14 @@ class SearchFragment : Fragment() {
                 return true
             }
         })
+        binding.floatingActionButtonSearch.setOnClickListener { showSearchFragment() }
     }
 
     private fun updateUi(model: SearchViewModel.UiModel) = when (model) {
         is Searching -> searchingProductsAdapter.categories = model.categories.toMutableList()
         is LoadCategories -> categoriesAdapter.categories = model.categories.toMutableList()
         is LoadRemoteContent -> goToProducts(model.products)
+        is LoadLocalContent -> goToProducts(model.products)
         else -> {
         }
     }
@@ -98,5 +101,13 @@ class SearchFragment : Fragment() {
                 products.toTypedArray()
             )
         )
+    }
+
+    private fun showSearchFragment() = activity?.let {
+        SearchDialogFragment.Builder()
+            .setOnFavoriteClickListener(viewModel::getFavoriteProducts)
+            .setOnViewedProductsClickListener(viewModel::getLocalProducts)
+            .create()
+            .show(it.supportFragmentManager, "TAG")
     }
 }
