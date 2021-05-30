@@ -71,15 +71,15 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
             container,
             false
         )
-        binding.textFavoriteButton.setOnClickListener {
+        binding.textViewFavoriteDialog.setOnClickListener {
             setOnFavoriteClickListener?.invoke()
             dismiss()
         }
-        binding.textViewedProductsButton.setOnClickListener {
+        binding.textViewViewedDialog.setOnClickListener {
             setOnViewedProductsClickListener?.invoke()
             dismiss()
         }
-        binding.textDialogClose.setOnClickListener {
+        binding.textViewCloseDialog.setOnClickListener {
             dismiss()
         }
         return binding.root

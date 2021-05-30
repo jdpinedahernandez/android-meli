@@ -16,10 +16,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white">
+        android:background="@color/ui_white">
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/editTextFindProduct"
+            android:id="@+id/edit_text_find_product_or_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionSearch"
@@ -31,38 +31,38 @@
             app:queryHint="@string/product_main_search_label" />
 
         <TextView
-            android:id="@+id/textViewRecentProducts"
+            android:id="@+id/text_view_search_title"
             style="@style/Text2.Normal.Bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
-            android:text="Categorias"
+            android:text="@string/search_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextFindProduct"
+            app:layout_constraintTop_toBottomOf="@+id/edit_text_find_product_or_category"
             app:uiShowContent="@{ viewModel.model  }" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewSearching"
+            android:id="@+id/recycler_view_searching"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextFindProduct"
+            app:layout_constraintTop_toBottomOf="@+id/edit_text_find_product_or_category"
             app:uiLoadPredictiveCategory="@{ viewModel.model  }" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewCategories"
+            android:id="@+id/recycler_view_categories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewRecentProducts"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_search_title"
             app:uiLoadCategories="@{ viewModel.model  }" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -73,7 +73,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerViewCategories"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_categories"
             app:uiShowContent="@{ viewModel.model  }" />
 
         <ProgressBar
@@ -101,9 +101,8 @@
             app:srcCompat="@drawable/ic_add"
             app:uiShowContent="@{ viewModel.model  }" />
 
-        <include
-            android:id="@+id/view_error"
-            layout="@layout/view_information"
+        <com.juanpineda.meli.ui.modules.home.common.view.InformationView
+            android:id="@+id/view_information"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="@+id/recycler_view_banners"

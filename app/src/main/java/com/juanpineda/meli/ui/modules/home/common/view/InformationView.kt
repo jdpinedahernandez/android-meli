@@ -28,8 +28,8 @@ class InformationView : ConstraintLayout {
         init(context)
     }
 
-    private lateinit var textViewError: TextView
-    private lateinit var buttonRetry: Button
+    private lateinit var textViewInformationTitle: TextView
+    private lateinit var buttonInformationRetry: Button
 
     private fun init(context: Context) {
         inflate(context, R.layout.view_information, this)
@@ -37,8 +37,8 @@ class InformationView : ConstraintLayout {
     }
 
     private fun initComponents() {
-        textViewError = findViewById(R.id.text_view_error)
-        buttonRetry = findViewById(R.id.button_retry)
+        textViewInformationTitle = findViewById(R.id.text_view_information_title)
+        buttonInformationRetry = findViewById(R.id.button_information_retry)
     }
 
     fun showErrorView(onErrorListener: () -> Unit) =
@@ -63,14 +63,14 @@ class InformationView : ConstraintLayout {
         @StringRes buttonTitle: Int,
         listener: () -> Unit
     ) {
-        textViewError.text = context.getText(errorTitle)
-        textViewError.setCompoundDrawablesWithIntrinsicBounds(
+        textViewInformationTitle.text = context.getText(errorTitle)
+        textViewInformationTitle.setCompoundDrawablesWithIntrinsicBounds(
             null,
             null,
             null,
             ContextCompat.getDrawable(context, icon)
         )
-        buttonRetry.text = context.getText(buttonTitle)
-        buttonRetry.setOnClickListener { listener.invoke() }
+        buttonInformationRetry.text = context.getText(buttonTitle)
+        buttonInformationRetry.setOnClickListener { listener.invoke() }
     }
 }

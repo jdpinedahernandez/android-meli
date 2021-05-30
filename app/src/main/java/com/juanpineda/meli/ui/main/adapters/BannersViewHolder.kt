@@ -9,8 +9,7 @@ class BannersViewHolder(var binding: ViewBannerBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(banner: BannerEntity, listener: (Category) -> Unit) {
         binding.banner = banner
-        binding.cloudImage.setImageResource(banner.image)
-
+        binding.imageViewBanner.setImageResource(banner.image)
         itemView.setOnClickListener { listener(banner.category) }
     }
 }

@@ -1,12 +1,10 @@
-package com.juanpineda.meli.ui.common
+package com.juanpineda.meli.ui.modules.home.search.view.bindingadapter
 
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.juanpineda.meli.R
 import com.juanpineda.meli.ui.common.ScopedViewModel.UiModel
 import com.juanpineda.meli.ui.main.adapters.CategoriesAdapter
 import com.juanpineda.meli.ui.main.adapters.SearchingProductsAdapter
@@ -56,20 +54,5 @@ fun RecyclerView.uiLoadCategories(uiState: UiModel?) {
         }
         UiModel.EmptyState -> visibility = VISIBLE
         else -> visibility = GONE
-    }
-}
-
-@BindingAdapter("uiNoData")
-fun TextView.uiNoData(uiState: UiModel?) {
-    visibility = when (uiState) {
-        UiModel.EmptyState -> {
-            text = context.getText(R.string.product_main_empty_products)
-            VISIBLE
-        }
-        UiModel.ErrorState -> {
-            text = context.getText(R.string.product_main_error)
-            VISIBLE
-        }
-        else -> GONE
     }
 }

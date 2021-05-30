@@ -13,28 +13,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="visible"
-            app:constraint_referenced_ids="textViewRecentProducts,recyclerViewProducts" />
+            app:constraint_referenced_ids="text_view_recent_products,recycler_view_products" />
 
         <TextView
-            android:id="@+id/textViewRecentProducts"
+            android:id="@+id/text_view_recent_products"
             style="@style/Text2.Normal.Bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
-            android:text="Productos"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/product_fragment_title" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewProducts"
+            android:id="@+id/recycler_view_products"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewRecentProducts" />
+            app:layout_constraintTop_toBottomOf="@+id/text_view_recent_products" />
 
         <ProgressBar
             android:id="@+id/progress_bar_products"
@@ -42,21 +42,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="gone" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.juanpineda.meli.ui.modules.home.common.view.InformationView
             android:id="@+id/view_information"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="gone" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

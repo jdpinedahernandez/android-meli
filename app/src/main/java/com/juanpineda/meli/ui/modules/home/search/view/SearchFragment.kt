@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -12,6 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 import com.juanpineda.meli.MeliApp
+import com.juanpineda.meli.R
 import com.juanpineda.meli.databinding.FragmentSearchBinding
 import com.juanpineda.meli.ui.common.getViewModel
 import com.juanpineda.meli.ui.common.hideKeyboard
@@ -27,6 +27,9 @@ import com.juanpineda.meli.ui.modules.home.search.dialog.SearchDialogFragment
 import com.juanpineda.meli.ui.modules.home.search.model.BannerFactory
 
 class SearchFragment : Fragment() {
+    companion object {
+        const val TAG = "SearchFragment"
+    }
 
     private lateinit var navController: NavController
     private lateinit var binding: FragmentSearchBinding
@@ -40,7 +43,7 @@ class SearchFragment : Fragment() {
         }
     }
     private val bannerAdapter by lazy {
-        BannerAdapter(BannerFactory().getList()) {
+        BannerAdapter(BannerFactory(requireContext()).getList()) {
             goToProducts(CATEGORY, it.id, it.name)
         }.apply {
             stateRestorationPolicy = PREVENT_WHEN_EMPTY
@@ -78,10 +81,10 @@ class SearchFragment : Fragment() {
     }
 
     private fun addListeners() {
-        binding.editTextFindProduct.setOnQueryTextListener(object :
+        binding.editTextFindProductOrCategory.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String): Boolean {
-                viewModel.searching(newText)
+                viewModel.searchingPredictiveCategory(newText)
                 return true
             }
 
@@ -91,7 +94,7 @@ class SearchFragment : Fragment() {
             }
         })
         binding.floatingActionButtonSearch.setOnClickListener { showSearchFragment() }
-        binding.viewError.buttonRetry.setOnClickListener { viewModel.getCategories() }
+        binding.viewInformation.showErrorView(viewModel::getCategories)
     }
 
     private fun goToProducts(
@@ -99,8 +102,7 @@ class SearchFragment : Fragment() {
         search: String,
         searchTitle: String = search
     ) {
-        binding.editTextFindProduct.hideKeyboard()
-        binding.recyclerViewSearching.visibility = GONE
+        binding.editTextFindProductOrCategory.hideKeyboard()
         findNavController().navigate(
             SearchFragmentDirections.actionSearchFragmentToProductsFragment(
                 ProductData(search, searchType, searchTitle)
@@ -110,9 +112,19 @@ class SearchFragment : Fragment() {
 
     private fun showSearchFragment() = activity?.let {
         SearchDialogFragment.Builder()
-            .setOnFavoriteClickListener { goToProducts(FAVORITE, "favoritos") }
-            .setOnViewedProductsClickListener { goToProducts(VIEWED, "vistos") }
+            .setOnFavoriteClickListener {
+                goToProducts(
+                    FAVORITE,
+                    getString(R.string.search_favorite_title)
+                )
+            }
+            .setOnViewedProductsClickListener {
+                goToProducts(
+                    VIEWED,
+                    getString(R.string.search_viewed_title)
+                )
+            }
             .create()
-            .show(it.supportFragmentManager, "TAG")
+            .show(it.supportFragmentManager, TAG)
     }
 }

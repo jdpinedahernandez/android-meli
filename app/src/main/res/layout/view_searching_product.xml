@@ -13,7 +13,6 @@
     </data>
 
     <TextView
-        android:id="@+id/productTitle"
         style="@style/Text2.Medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

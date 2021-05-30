@@ -18,4 +18,28 @@
     <string name="product_main_item_label">Envío Gratis</string>
     <string name="information_view_error_button">Reintentar</string>
     <string name="information_view_empty_button">Volver</string>
+    <!--  Search Fragment  -->
+    <string name="search_title">Categorías</string>
+    <string name="search_favorite_title">Favoritos</string>
+    <string name="search_viewed_title">Vistos</string>
+    <!--  Banner Factory  -->
+    <string name="banner_first_category_description">Renueva tu celular</string>
+    <string name="banner_first_category_id">MCO1051</string>
+    <string name="banner_first_category_name">Celulares y Teléfonos</string>
+    <string name="banner_second_category_description">Ejercita tu cuerpo</string>
+    <string name="banner_second_category_id">MCO1276</string>
+    <string name="banner_second_category_name">Deportes y Fitness</string>
+    <string name="banner_third_category_description">Mejora tu espacio</string>
+    <string name="banner_third_category_id">MCO1574</string>
+    <string name="banner_third_category_name">Hogar y Muebles</string>
+    <string name="banner_button">Acceder</string>
+
+    <!--  Dialog Search  -->
+    <string name="dialog_title">Más categorías</string>
+    <string name="dialog_first_button">Favoritos</string>
+    <string name="dialog_second_button">Vistos   </string>
+
+    <!--  Product Fragment  -->
+    <string name="product_fragment_title">Productos</string>
+
 </resources>

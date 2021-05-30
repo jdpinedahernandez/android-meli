@@ -25,7 +25,7 @@ class SearchViewModel(
         getCategories()
     }
 
-    fun searching(query: String) {
+    fun searchingPredictiveCategory(query: String) {
         if (::searchJob.isInitialized) searchJob.cancel()
         if (query.isNotEmpty())
             searchJob = launch {

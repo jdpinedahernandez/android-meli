@@ -1,34 +1,40 @@
 package com.juanpineda.meli.ui.modules.home.search.model
 
+import android.content.Context
 import com.juanpineda.domain.Category
 import com.juanpineda.meli.R
 
-class BannerFactory {
+class BannerFactory(val context: Context) {
     fun getList() = listOf(
         BannerEntity(
-            "Celulares y Teléfonos",
-            "subtitulo",
+            context.getString(R.string.banner_first_category_description),
             R.drawable.ic_phone,
-            Category(id = "MCO1051", "Celulares y Teléfonos")
+            Category(
+                context.getString(R.string.banner_first_category_id),
+                context.getString(R.string.banner_first_category_name),
+            )
         ),
         BannerEntity(
-            "Deportes y Fitness",
-            "subtitulo",
+            context.getString(R.string.banner_second_category_description),
             R.drawable.ic_sports,
-            Category(id = "MCO1276", "Deportes y Fitness")
+            Category(
+                context.getString(R.string.banner_second_category_id),
+                context.getString(R.string.banner_second_category_name),
+            )
         ),
         BannerEntity(
-            "Hogar y Muebles",
-            "subtitulo",
+            context.getString(R.string.banner_third_category_description),
             R.drawable.ic_phone,
-            Category(id = "MCO1574", "Hogar y Muebles")
+            Category(
+                context.getString(R.string.banner_third_category_id),
+                context.getString(R.string.banner_third_category_name),
+            )
         )
     )
 }
 
 data class BannerEntity(
-    val title: String,
-    val subtitle: String,
+    val description: String,
     val image: Int = 0,
     val category: Category
 )
