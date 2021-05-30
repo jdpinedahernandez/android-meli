@@ -5,6 +5,7 @@ import com.juanpineda.data.toDomainProduct
 import com.juanpineda.data.toRoomProduct
 import com.juanpineda.domain.Product
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class RoomDataSource(db: ProductDatabase) : LocalDataSource {
@@ -42,4 +43,8 @@ class RoomDataSource(db: ProductDatabase) : LocalDataSource {
     override suspend fun update(product: Product) {
         withContext(Dispatchers.IO) { productDao.updateProduct(product.toRoomProduct()) }
     }
+
+    override fun getFavoriteProducts() =
+        productDao.getFavoriteProducts()
+            .map { productDao -> productDao.map { it.toDomainProduct() } }
 }

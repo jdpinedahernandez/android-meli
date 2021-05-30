@@ -29,6 +29,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.core:core-ktx:$core_version"
     implementation "androidx.appcompat:appcompat:$appcompact_version"
+    implementation kotlinLibs.values()
     androidTestImplementation "androidx.test.ext:junit:$test_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$test_espresso_version"
     testImplementation "android.arch.core:core-testing:$arch_core_version"

@@ -27,12 +27,6 @@ class ProductDetailInfoView @JvmOverloads constructor(
             bold { append(context.getString(R.string.product_detail_available_quantity)) }
             appendln(availableQuantity.toString())
 
-            bold { append(context.getString(R.string.product_detail_favorite)) }
-            appendln(
-                if (favorite) context.getString(R.string.product_detail_favorite_yes)
-                else context.getString(R.string.product_detail_favorite_no)
-            )
-
             bold { append(context.getString(R.string.product_detail_pictures)) }
             appendln(pictures.size.toString())
 

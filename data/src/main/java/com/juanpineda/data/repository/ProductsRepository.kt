@@ -6,6 +6,8 @@ import com.juanpineda.domain.Category
 import com.juanpineda.domain.Product
 import com.juanpineda.data.server.result.ResultHandler
 import com.juanpineda.data.server.result.onSuccess
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 
 class ProductsRepository(
         private val localDataSource: LocalDataSource,
@@ -21,6 +23,8 @@ class ProductsRepository(
     suspend fun getProductsByName(query: String): ResultHandler<List<Product>> = remoteDataSource.getProductsByName(query)
 
     suspend fun getProducts(): List<Product> = if (localDataSource.isEmpty().not()) localDataSource.getProducts() else emptyList()
+
+    fun getFavoriteProducts(): Flow<List<Product>> = localDataSource.getFavoriteProducts()
 
     suspend fun findById(id: String): Product {
         return if (localDataSource.isProductIsExist(id)) {

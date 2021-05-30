@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.juanpineda.domain.Product
 import com.juanpineda.meli.MeliApp
 import com.juanpineda.meli.R
@@ -30,7 +31,8 @@ class ProductDetailFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        component = (activity?.application as MeliApp).component.plus(DetailActivityModule(args.productId))
+        component =
+            (activity?.application as MeliApp).component.plus(DetailActivityModule(args.productId))
     }
 
     override fun onCreateView(
@@ -51,13 +53,22 @@ class ProductDetailFragment : Fragment() {
 
     private fun updateUi(model: DetailViewModel.UiModel) = when (model) {
         is DetailViewModel.UiModel.LoadDetailContent -> loadContentView(model.product)
-        is DetailViewModel.UiModel.LoadFavoriteContent -> loadContentView(model.product)
+        is DetailViewModel.UiModel.LoadFavoriteContent -> updateFavoriteState(model.product)
     }
 
     private fun loadContentView(product: Product) = with(binding) {
         productDetailSummary.text = product.title
         viewPagerProducts.loadContent(product.pictures)
         productDetailInfo.setProduct(product)
-        productDetailFavorite.setImageDrawable(requireContext().getDrawable(if (product.favorite) R.drawable.ic_favorite_on else R.drawable.ic_favorite_off))
+        binding.productDetailFavorite.setImageDrawable(requireContext().getDrawable(if (product.favorite) R.drawable.ic_favorite_on else R.drawable.ic_favorite_off))
+    }
+
+    private fun updateFavoriteState(product: Product) {
+        binding.productDetailFavorite.setImageDrawable(requireContext().getDrawable(if (product.favorite) R.drawable.ic_favorite_on else R.drawable.ic_favorite_off))
+        if (product.favorite)
+            Snackbar.make(
+                binding.root, getString(R.string.product_detail_favorite),
+                Snackbar.LENGTH_SHORT
+            ).show()
     }
 }

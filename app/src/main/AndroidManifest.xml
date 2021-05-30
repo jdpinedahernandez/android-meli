@@ -18,7 +18,8 @@
             android:configChanges="orientation"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.juanpineda.meli.ui.modules.home.activity.view.HomeActivity">
+            android:name="com.juanpineda.meli.ui.modules.home.activity.view.HomeActivity"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,6 +1,7 @@
 package com.juanpineda.meli.ui.modules.home.search
 
 import com.juanpineda.data.repository.ProductsRepository
+import com.juanpineda.domain.Category
 import com.juanpineda.meli.ui.modules.home.search.viewmodel.SearchViewModel
 import com.juanpineda.usecases.GetFavoriteProducts
 import com.juanpineda.usecases.GetPredictiveCategory
@@ -10,14 +11,12 @@ import dagger.Provides
 import dagger.Subcomponent
 
 @Module
-class SearchFragmentModule {
+class SearchFragmentModule() {
 
     @Provides
     fun searchViewModelProvider(
-        getProducts: GetProducts,
-        getPredictiveCategory: GetPredictiveCategory,
-        getFavoriteProducts: GetFavoriteProducts
-    ) = SearchViewModel(getProducts, getPredictiveCategory, getFavoriteProducts)
+        getPredictiveCategory: GetPredictiveCategory
+    ) = SearchViewModel(getPredictiveCategory)
 
     @Provides
     fun getProductsProvider(productsRepository: ProductsRepository) =

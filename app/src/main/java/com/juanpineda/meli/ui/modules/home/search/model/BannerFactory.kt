@@ -9,19 +9,19 @@ class BannerFactory {
             "Celulares y Teléfonos",
             "subtitulo",
             R.drawable.ic_phone,
-            Category(id = "MCO1051")
+            Category(id = "MCO1051", "Celulares y Teléfonos")
         ),
         BannerEntity(
             "Deportes y Fitness",
             "subtitulo",
             R.drawable.ic_sports,
-            Category(id = "MCO1276")
+            Category(id = "MCO1276", "Deportes y Fitness")
         ),
         BannerEntity(
             "Hogar y Muebles",
             "subtitulo",
             R.drawable.ic_phone,
-            Category(id = "MCO1574")
+            Category(id = "MCO1574", "Hogar y Muebles")
         )
     )
 }

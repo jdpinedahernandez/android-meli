@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.juanpineda.meli.ui.modules.home.search.viewmodel.SearchViewModel" />
@@ -14,42 +16,43 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
-        tools:context=".ui.main.view.MainActivity">
+        android:background="@android:color/white">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/editTextFindProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:queryHint="@string/product_main_search_label"
             android:imeOptions="actionSearch"
-            android:textColorHint="@android:color/black"
             android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryHint="@string/product_main_search_label" />
 
         <TextView
             android:id="@+id/textViewRecentProducts"
+            style="@style/Text2.Normal.Bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
-            android:gravity="center"
             android:text="Categorias"
-            style="@style/Text2.Normal.Bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextFindProduct" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextFindProduct"
+            app:uiShowContent="@{ viewModel.model  }" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewSearching"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/editTextFindProduct"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextFindProduct"
+            app:uiLoadPredictiveCategory="@{ viewModel.model  }" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewCategories"
@@ -59,7 +62,8 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewRecentProducts" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewRecentProducts"
+            app:uiLoadCategories="@{ viewModel.model  }" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_banners"
@@ -69,7 +73,20 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerViewCategories" />
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewCategories"
+            app:uiShowContent="@{ viewModel.model  }" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:uiLoading="@{ viewModel.model  }" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floating_action_button_search"
@@ -81,8 +98,20 @@
             android:clickable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_add" />
+            app:srcCompat="@drawable/ic_add"
+            app:uiShowContent="@{ viewModel.model  }" />
 
+        <include
+            android:id="@+id/view_error"
+            layout="@layout/view_information"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="@+id/recycler_view_banners"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:uiErrorState="@{ viewModel.model  }"
+            tools:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

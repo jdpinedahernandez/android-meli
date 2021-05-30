@@ -1,6 +1,7 @@
 package com.juanpineda.data.source
 
 import com.juanpineda.domain.Product
+import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSource {
     suspend fun isEmpty(): Boolean
@@ -11,4 +12,5 @@ interface LocalDataSource {
     suspend fun findById(id: String): Product
     suspend fun isProductIsExist(id: String): Boolean
     suspend fun update(product: Product)
+    fun getFavoriteProducts(): Flow<List<Product>>
 }

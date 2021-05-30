@@ -19,12 +19,12 @@
         android:name="com.juanpineda.meli.ui.modules.home.products.view.ProductsFragment"
         android:label="ProductsFragment"
         tools:layout="@layout/fragment_products">
-        <argument
-            android:name="products"
-            app:argType="com.juanpineda.domain.Product[]" />
         <action
             android:id="@+id/action_productsFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />
+        <argument
+            android:name="productSearchType"
+            app:argType="com.juanpineda.meli.ui.modules.home.products.model.ProductData" />
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"

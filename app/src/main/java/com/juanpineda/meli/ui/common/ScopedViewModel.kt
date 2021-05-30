@@ -9,6 +9,13 @@ abstract class ScopedViewModel : ViewModel(), Scope by Scope.Impl() {
         initScope()
     }
 
+    sealed class UiModel {
+        object Loading : UiModel()
+        object EmptyState : UiModel()
+        object ErrorState : UiModel()
+        abstract class FeatureModel : UiModel()
+    }
+
     @CallSuper
     override fun onCleared() {
         destroyScope()
