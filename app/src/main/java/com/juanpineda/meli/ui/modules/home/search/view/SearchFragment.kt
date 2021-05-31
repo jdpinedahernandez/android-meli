@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.
 import com.juanpineda.meli.MeliApp
 import com.juanpineda.meli.R
 import com.juanpineda.meli.databinding.FragmentSearchBinding
-import com.juanpineda.meli.ui.common.getViewModel
-import com.juanpineda.meli.ui.common.hideKeyboard
-import com.juanpineda.meli.ui.main.adapters.BannerAdapter
-import com.juanpineda.meli.ui.main.adapters.CategoriesAdapter
-import com.juanpineda.meli.ui.main.adapters.SearchingProductsAdapter
+import com.juanpineda.meli.ui.modules.home.common.getViewModel
+import com.juanpineda.meli.ui.modules.home.common.hideKeyboard
+import com.juanpineda.meli.ui.modules.home.search.adapters.BannerAdapter
+import com.juanpineda.meli.ui.modules.home.search.adapters.CategoriesAdapter
+import com.juanpineda.meli.ui.modules.home.search.adapters.SearchingProductsAdapter
 import com.juanpineda.meli.ui.modules.home.products.model.ProductData
 import com.juanpineda.meli.ui.modules.home.products.model.ProductSearchType
 import com.juanpineda.meli.ui.modules.home.products.model.ProductSearchType.*

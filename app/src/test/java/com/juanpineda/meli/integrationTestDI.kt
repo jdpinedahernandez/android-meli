@@ -1,23 +1,27 @@
 package com.juanpineda.meli
 
 import com.juanpineda.data.di.DataModule
+import com.juanpineda.data.server.result.ResultHandler
+import com.juanpineda.data.server.result.SuccessResponse
 import com.juanpineda.data.source.LocalDataSource
 import com.juanpineda.data.source.RemoteDataSource
 import com.juanpineda.domain.Category
 import com.juanpineda.domain.Product
 import com.juanpineda.meli.di.MeliComponent
-import com.juanpineda.data.server.result.ResultHandler
-import com.juanpineda.data.server.result.SuccessResponse
 import dagger.Component
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [
-    TestAppModule::class,
-    DataModule::class
-])
+@Component(
+    modules = [
+        TestAppModule::class,
+        DataModule::class
+    ]
+)
 interface TestComponent : MeliComponent {
 
     val localDataSource: LocalDataSource
@@ -60,7 +64,8 @@ class FakeLocalDataSource : LocalDataSource {
 
     override suspend fun getProducts(): List<Product> = products
 
-    override suspend fun getProductsByTitle(title: String): List<Product> = products.filter { it.title == title }
+    override suspend fun getProductsByTitle(title: String): List<Product> =
+        products.filter { it.title == title }
 
     override suspend fun findById(id: String): Product = products.first { it.id == id }
 
@@ -69,6 +74,8 @@ class FakeLocalDataSource : LocalDataSource {
     override suspend fun update(product: Product) {
         products = products.filterNot { it.id == product.id } + product
     }
+
+    override fun getFavoriteProducts(): Flow<List<Product>> = flowOf(products.filter { it.favorite })
 }
 
 class FakeRemoteDataSource : RemoteDataSource {
@@ -77,28 +84,34 @@ class FakeRemoteDataSource : RemoteDataSource {
 
     private var categories = defaultFakeCategories
 
-    override suspend fun getPredictiveCategory(query: String): ResultHandler<List<Category>> = SuccessResponse(categories.filter { it.name == query })
+    override suspend fun getPredictiveCategory(query: String): ResultHandler<List<Category>> =
+        SuccessResponse(categories.filter { it.name == query })
 
-    override suspend fun getProductsByCategory(query: String) = SuccessResponse(products.filter { it.categoryId == query })
+    override suspend fun getCategories(): ResultHandler<List<Category>> =
+        SuccessResponse(categories)
 
-    override suspend fun getProductsByName(query: String): ResultHandler<List<Product>> = SuccessResponse(products.filter { it.title.contains(query)})
+    override suspend fun getProductsByCategory(query: String) =
+        SuccessResponse(products.filter { it.categoryId == query })
+
+    override suspend fun getProductsByName(query: String): ResultHandler<List<Product>> =
+        SuccessResponse(products.filter { it.title.contains(query) })
 
     override suspend fun getProductDetail(itemId: String) = SuccessResponse(mockedProduct)
 }
 
 val defaultFakeProducts = listOf(
-        mockedProduct.copy("MCO559474248", "celular huawei", categoryId = "MLA1055"),
-        mockedProduct.copy("MCO559474249", "vehiculo mazda", categoryId = "MLA1032"),
-        mockedProduct.copy("MCO559474250", "sombrilla roja grande", categoryId = "MLA1025"),
-        mockedProduct.copy("MCO559474267", "colcha para catre", categoryId = "MLA1051"),
-        mockedProduct.copy("MCO559474248", "celular iphone", categoryId = "MLA1055"),
-        mockedProduct.copy("MCO559474248", "repuestos para celulares", categoryId = "MLA1055"),
-        mockedProduct.copy("MCO559474248", "audifonos de celulares", categoryId = "MLA1055")
+    mockedProduct.copy("MCO559474248", "celular huawei", categoryId = "MLA1055", favorite = true),
+    mockedProduct.copy("MCO559474249", "vehiculo mazda", categoryId = "MLA1032", favorite = false),
+    mockedProduct.copy("MCO559474250", "sombrilla roja grande", categoryId = "MLA1025", favorite = false),
+    mockedProduct.copy("MCO559474267", "colcha para catre", categoryId = "MLA1051", favorite = false),
+    mockedProduct.copy("MCO559474248", "celular iphone", categoryId = "MLA1055", favorite = false),
+    mockedProduct.copy("MCO559474248", "repuestos para celulares", categoryId = "MLA1055", favorite = true),
+    mockedProduct.copy("MCO559474248", "audifonos de celulares", categoryId = "MLA1055", favorite = true)
 )
 
 val defaultFakeCategories = listOf(
-        mockedCategory.copy(),
-        mockedCategory.copy("MLA1056", "Computadores"),
-        mockedCategory.copy("MLA1057", "Perfumes"),
-        mockedCategory.copy("MLA1058", "Aeroplanos")
+    mockedCategory.copy(),
+    mockedCategory.copy("MLA1056", "Computadores"),
+    mockedCategory.copy("MLA1057", "Perfumes"),
+    mockedCategory.copy("MLA1058", "Aeroplanos")
 )

@@ -15,24 +15,24 @@ import com.juanpineda.domain.Product
 import com.juanpineda.meli.MeliApp
 import com.juanpineda.meli.R
 import com.juanpineda.meli.databinding.ProductDetailBinding
-import com.juanpineda.meli.ui.common.getViewModel
-import com.juanpineda.meli.ui.common.loadContent
-import com.juanpineda.meli.ui.detail.DetailActivityComponent
-import com.juanpineda.meli.ui.detail.DetailActivityModule
-import com.juanpineda.meli.ui.detail.viewmodel.DetailViewModel
+import com.juanpineda.meli.ui.modules.home.common.getViewModel
+import com.juanpineda.meli.ui.modules.home.common.loadContent
+import com.juanpineda.meli.ui.modules.home.productdetail.ProductDetailFragmentComponent
+import com.juanpineda.meli.ui.modules.home.productdetail.ProductDetailFragmentModule
+import com.juanpineda.meli.ui.modules.home.productdetail.viewmodel.ProductDetailViewModel
 
 class ProductDetailFragment : Fragment() {
 
     private lateinit var navController: NavController
     private lateinit var binding: ProductDetailBinding
-    private lateinit var component: DetailActivityComponent
-    private val viewModel by lazy { getViewModel { component.detaiViewModel } }
+    private lateinit var component: ProductDetailFragmentComponent
+    private val viewModel by lazy { getViewModel { component.productDetailViewModel } }
     private val args: ProductDetailFragmentArgs by navArgs()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         component =
-            (activity?.application as MeliApp).component.plus(DetailActivityModule(args.productId))
+            (activity?.application as MeliApp).component.plus(ProductDetailFragmentModule(args.productId))
     }
 
     override fun onCreateView(
@@ -51,9 +51,9 @@ class ProductDetailFragment : Fragment() {
         binding.productDetailFavorite.setOnClickListener { viewModel.onFavoriteClicked() }
     }
 
-    private fun updateUi(model: DetailViewModel.UiModel) = when (model) {
-        is DetailViewModel.UiModel.LoadDetailContent -> loadContentView(model.product)
-        is DetailViewModel.UiModel.LoadFavoriteContent -> updateFavoriteState(model.product)
+    private fun updateUi(model: ProductDetailViewModel.UiModel) = when (model) {
+        is ProductDetailViewModel.UiModel.LoadDetailContent -> loadContentView(model.product)
+        is ProductDetailViewModel.UiModel.LoadFavoriteContent -> updateFavoriteState(model.product)
     }
 
     private fun loadContentView(product: Product) = with(binding) {

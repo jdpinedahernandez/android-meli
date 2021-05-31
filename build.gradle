@@ -65,6 +65,7 @@ allprojects {
 
         kotlinLibs = [
                 stdlib    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+                reflect    : "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version",
                 coroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
         ]
 

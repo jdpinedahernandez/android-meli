@@ -17,9 +17,9 @@ import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.
 import com.juanpineda.domain.Product
 import com.juanpineda.meli.MeliApp
 import com.juanpineda.meli.databinding.FragmentProductsBinding
-import com.juanpineda.meli.ui.common.ScopedViewModel
-import com.juanpineda.meli.ui.common.getViewModel
-import com.juanpineda.meli.ui.main.adapters.ContentProductsAdapter
+import com.juanpineda.meli.ui.modules.home.common.ScopedViewModel
+import com.juanpineda.meli.ui.modules.home.common.getViewModel
+import com.juanpineda.meli.ui.modules.home.products.adapters.ContentProductsAdapter
 import com.juanpineda.meli.ui.modules.home.products.ProductsFragmentComponent
 import com.juanpineda.meli.ui.modules.home.products.ProductsFragmentModule
 import com.juanpineda.meli.ui.modules.home.products.viewmodel.ProductsViewModel

@@ -1,6 +1,6 @@
 package com.juanpineda.usecases
 
-import com.juanpineda.data.repository.ProductsRepository
+import com.juanpineda.data.repository.CategoriesRepository
 import com.juanpineda.data.server.result.ErrorResponse
 import com.juanpineda.data.server.result.error.Failure.NetworkConnection
 import com.juanpineda.data.server.result.error.Failure.UnknownException
@@ -23,13 +23,13 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class GetPredictiveCategoryTest {
     @Mock
-    lateinit var productsRepository: ProductsRepository
+    lateinit var categoriesRepository: CategoriesRepository
 
     private lateinit var sut: GetPredictiveCategory
 
     @Before
     fun setup() {
-        sut = GetPredictiveCategory(productsRepository)
+        sut = GetPredictiveCategory(categoriesRepository)
     }
 
     @Test
@@ -37,7 +37,7 @@ class GetPredictiveCategoryTest {
         // given
         val categories = listOf(Category())
         runBlocking {
-            given(productsRepository.getPredictiveCategory(ArgumentMatchers.anyString()))
+            given(categoriesRepository.getPredictiveCategory(ArgumentMatchers.anyString()))
                 .willReturn(SuccessResponse(categories))
             // when
             sut.invoke(ArgumentMatchers.anyString()).onSuccess {
@@ -52,7 +52,7 @@ class GetPredictiveCategoryTest {
         // given
         val error = UnknownException
         runBlocking {
-            given(productsRepository.getPredictiveCategory(ArgumentMatchers.anyString()))
+            given(categoriesRepository.getPredictiveCategory(ArgumentMatchers.anyString()))
                 .willReturn(ErrorResponse(UnknownException))
             // when
             sut.invoke(ArgumentMatchers.anyString()).onError {
@@ -67,7 +67,7 @@ class GetPredictiveCategoryTest {
         // given
         val error = NetworkConnection()
         runBlocking {
-            given(productsRepository.getPredictiveCategory(ArgumentMatchers.anyString()))
+            given(categoriesRepository.getPredictiveCategory(ArgumentMatchers.anyString()))
                 .willReturn(ErrorResponse(error))
             // when
             sut.invoke(ArgumentMatchers.anyString()).onError {

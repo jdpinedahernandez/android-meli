@@ -7,7 +7,8 @@ val mockedProduct = Product(
         "MCO559474248",
         "Micrófono 3.5mm Solapa, Ideal Para Grabar En Pc, Carro, Gps",
         22500,
-        "http://mco-s1-p.mlstatic.com/816764-MCO42688996467_072020-I.jpg"
+        "http://mco-s1-p.mlstatic.com/816764-MCO42688996467_072020-I.jpg",
+        favorite = false
 )
 
 val mockedProductDetail = Product(

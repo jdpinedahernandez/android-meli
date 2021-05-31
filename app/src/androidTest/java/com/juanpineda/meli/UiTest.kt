@@ -15,7 +15,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.jakewharton.espresso.OkHttp3IdlingResource
-import com.juanpineda.meli.ui.main.view.MainActivity
+import com.juanpineda.meli.ui.modules.home.activity.view.HomeActivity
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -28,7 +28,7 @@ class UiTest {
 
     @ExperimentalTime
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, false, false)
+    val activityTestRule = ActivityTestRule(HomeActivity::class.java, false, false)
 
 
     private lateinit var mockWebServer: MockWebServer
@@ -46,13 +46,18 @@ class UiTest {
         resource = OkHttp3IdlingResource.create("OkHttp", component.meliDB.okHttpClient)
         IdlingRegistry.getInstance().register(resource)
 
-        val intent = Intent(instrumentation.targetContext, MainActivity::class.java)
+        val intent = Intent(instrumentation.targetContext, HomeActivity::class.java)
 
         activityTestRule.launchActivity(intent)
     }
 
     @Test
     fun clickACategoryShowAssociatesProductsAndNavigateToProductDetailValidateDetailTitle() {
+        mockWebServer.enqueue(
+            MockResponse()
+                .setResponseCode(200)
+                .setBody(categories)
+        )
         mockWebServer.enqueue(
             MockResponse()
                 .setResponseCode(200)
@@ -74,21 +79,21 @@ class UiTest {
         onView(withId(R.id.search_src_text))
             .perform(typeText("b"))
         SystemClock.sleep(1000)
-        onView(withId(R.id.recyclerViewSearching)).perform(
+        onView(withId(R.id.recycler_view_searching)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 0,
                 click()
             )
         )
         SystemClock.sleep(1000)
-        onView(withId(R.id.recycler)).perform(
+        onView(withId(R.id.recycler_view_products)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                0,
+                1,
                 click()
             )
         )
         SystemClock.sleep(2000)
-        onView(withId(R.id.productDetailSummary))
+        onView(withId(R.id.product_detail_summary))
             .check(matches(withText("B&o Play De Bang & Olufsen A2")))
     }
 

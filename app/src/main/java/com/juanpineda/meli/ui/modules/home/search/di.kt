@@ -1,11 +1,9 @@
 package com.juanpineda.meli.ui.modules.home.search
 
-import com.juanpineda.data.repository.ProductsRepository
-import com.juanpineda.domain.Category
+import com.juanpineda.data.repository.CategoriesRepository
 import com.juanpineda.meli.ui.modules.home.search.viewmodel.SearchViewModel
-import com.juanpineda.usecases.GetFavoriteProducts
+import com.juanpineda.usecases.GetCategories
 import com.juanpineda.usecases.GetPredictiveCategory
-import com.juanpineda.usecases.GetProducts
 import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
@@ -15,20 +13,17 @@ class SearchFragmentModule() {
 
     @Provides
     fun searchViewModelProvider(
-        getPredictiveCategory: GetPredictiveCategory
-    ) = SearchViewModel(getPredictiveCategory)
+        getPredictiveCategory: GetPredictiveCategory,
+        getCategories: GetCategories
+    ) = SearchViewModel(getPredictiveCategory, getCategories)
 
     @Provides
-    fun getProductsProvider(productsRepository: ProductsRepository) =
-        GetProducts(productsRepository)
+    fun getPredictiveCategoryProvider(categoriesRepository: CategoriesRepository) =
+        GetPredictiveCategory(categoriesRepository)
 
     @Provides
-    fun getPredictiveCategoryProvider(productsRepository: ProductsRepository) =
-        GetPredictiveCategory(productsRepository)
-
-    @Provides
-    fun getFavoriteProductsProvider(productsRepository: ProductsRepository) =
-        GetFavoriteProducts(productsRepository)
+    fun getCategoriesProvider(categoriesRepository: CategoriesRepository) =
+        GetCategories(categoriesRepository)
 }
 
 @Subcomponent(modules = [(SearchFragmentModule::class)])

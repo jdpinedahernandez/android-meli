@@ -20,7 +20,7 @@
         android:orientation="horizontal"
         android:padding="2dp">
 
-        <com.juanpineda.meli.ui.common.AspectRatioImageView
+        <com.juanpineda.meli.ui.modules.home.common.view.AspectRatioImageView
             android:id="@+id/product_cover"
             android:layout_width="50dp"
             android:layout_height="wrap_content"

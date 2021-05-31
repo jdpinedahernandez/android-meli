@@ -5,9 +5,9 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.juanpineda.meli.ui.common.ScopedViewModel.UiModel
-import com.juanpineda.meli.ui.main.adapters.CategoriesAdapter
-import com.juanpineda.meli.ui.main.adapters.SearchingProductsAdapter
+import com.juanpineda.meli.ui.modules.home.common.ScopedViewModel.UiModel
+import com.juanpineda.meli.ui.modules.home.search.adapters.CategoriesAdapter
+import com.juanpineda.meli.ui.modules.home.search.adapters.SearchingProductsAdapter
 import com.juanpineda.meli.ui.modules.home.search.viewmodel.SearchViewModel
 
 @BindingAdapter("uiLoading")

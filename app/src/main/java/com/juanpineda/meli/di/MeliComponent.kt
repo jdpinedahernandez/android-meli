@@ -3,10 +3,8 @@ package com.juanpineda.meli.di
 import android.app.Application
 import com.juanpineda.data.di.DataModule
 import com.juanpineda.data.di.ServerModule
-import com.juanpineda.meli.ui.detail.DetailActivityComponent
-import com.juanpineda.meli.ui.detail.DetailActivityModule
-import com.juanpineda.meli.ui.main.MainActivityComponent
-import com.juanpineda.meli.ui.main.MainActivityModule
+import com.juanpineda.meli.ui.modules.home.productdetail.ProductDetailFragmentComponent
+import com.juanpineda.meli.ui.modules.home.productdetail.ProductDetailFragmentModule
 import com.juanpineda.meli.ui.modules.home.products.ProductsFragmentComponent
 import com.juanpineda.meli.ui.modules.home.products.ProductsFragmentModule
 import com.juanpineda.meli.ui.modules.home.search.SearchFragmentComponent
@@ -19,8 +17,7 @@ import javax.inject.Singleton
 @Component(modules = [AppModule::class, DataModule::class, ServerModule::class])
 interface MeliComponent {
 
-    fun plus(module: MainActivityModule): MainActivityComponent
-    fun plus(module: DetailActivityModule): DetailActivityComponent
+    fun plus(module: ProductDetailFragmentModule): ProductDetailFragmentComponent
     fun plus(module: SearchFragmentModule): SearchFragmentComponent
     fun plus(module: ProductsFragmentModule): ProductsFragmentComponent
 

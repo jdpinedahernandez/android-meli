@@ -14,10 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.juanpineda.meli.ui.detail.view.DetailActivity"
-            android:configChanges="orientation"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name="com.juanpineda.meli.ui.modules.home.activity.view.HomeActivity"
             android:configChanges="orientation|screenSize">
             <intent-filter>

@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.juanpineda.meli.ui.detail.viewmodel.DetailViewModel" />
+            type="com.juanpineda.meli.ui.modules.home.productdetail.viewmodel.ProductDetailViewModel" />
 
     </data>
 
@@ -88,7 +88,7 @@
                     app:cardBackgroundColor="@color/colorAccent"
                     app:cardPreventCornerOverlap="false">
 
-                    <com.juanpineda.meli.ui.detail.view.ProductDetailInfoView
+                    <com.juanpineda.meli.ui.modules.home.productdetail.view.ProductDetailInfoView
                         android:id="@+id/product_detail_info"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
