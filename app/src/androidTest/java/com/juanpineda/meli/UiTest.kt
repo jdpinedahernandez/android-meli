@@ -97,6 +97,40 @@ class UiTest {
             .check(matches(withText("B&o Play De Bang & Olufsen A2")))
     }
 
+    @Test
+    fun clickACategoryShowEmptyState() {
+        mockWebServer.enqueue(
+            MockResponse()
+                .setResponseCode(200)
+                .setBody(categories)
+        )
+        mockWebServer.enqueue(
+            MockResponse()
+                .setResponseCode(200)
+                .setBody(predictiveCategory)
+        )
+        mockWebServer.enqueue(
+            MockResponse()
+                .setResponseCode(200)
+                .setBody(emptyProductsByCategory)
+        )
+        SystemClock.sleep(1000)
+        onView(withId(R.id.search_button))
+            .perform(click())
+        onView(withId(R.id.search_src_text))
+            .perform(typeText("b"))
+        SystemClock.sleep(1000)
+        onView(withId(R.id.recycler_view_searching)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                0,
+                click()
+            )
+        )
+        SystemClock.sleep(2000)
+        onView(withId(R.id.text_view_information_title))
+            .check(matches(withText("No hay productos registrados.")))
+    }
+
     @After
     fun tearDown() {
         mockWebServer.close()

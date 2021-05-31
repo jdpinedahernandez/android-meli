@@ -48,7 +48,7 @@ class ProductsViewModel(
         searchJob = launch {
             _model.value = UiModel.Loading
             getProductsByCategory.invoke(categoryId)
-                .onSuccess { _model.value = LoadProducts(it) }
+                .onSuccess { _model.value = getProductsContent(it) }
                 .onError { _model.value = UiModel.ErrorState }
         }
     }
@@ -57,7 +57,7 @@ class ProductsViewModel(
         launch {
             _model.value = UiModel.Loading
             getProductByName.invoke(query)
-                .onSuccess { _model.value = LoadProducts((it)) }
+                .onSuccess { _model.value = getProductsContent(it) }
                 .onError { _model.value = UiModel.ErrorState }
         }
     }
@@ -65,20 +65,19 @@ class ProductsViewModel(
     private fun getLocalProducts() {
         launch {
             _model.value = UiModel.Loading
-            _model.value = with(getProducts.invoke()) {
-                if (this.isEmpty()) UiModel.EmptyState
-                else LoadProducts(this)
-            }
+            _model.value = getProductsContent(getProducts.invoke())
         }
     }
 
     private fun getFavoriteProducts() = launch {
         getFavoriteProducts.invoke().collect {
-            if (it.isNotEmpty())
-                _model.value = LoadProducts(it)
-            else _model.value = UiModel.EmptyState
+            _model.value = getProductsContent(it)
         }
     }
+
+    private fun getProductsContent(products: List<Product>) =
+        if (products.isNotEmpty()) LoadProducts(products)
+        else UiModel.EmptyState
 
     override fun onCleared() {
         destroyScope()

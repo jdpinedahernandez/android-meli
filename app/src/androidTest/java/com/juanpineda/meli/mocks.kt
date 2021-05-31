@@ -98,6 +98,23 @@ val productsByCategory = """
 }
 """.trimIndent()
 
+val emptyProductsByCategory = """
+{
+  "site_id": "MCO",
+  "paging": {},
+  "results": [
+  ],
+  "secondary_results": [
+  ],
+  "related_results": [
+  ],
+  "sort": {},
+  "available_sorts": [],
+  "filters": [],
+  "available_filters": []
+}
+""".trimIndent()
+
 val productDetailByCategory = """
 {
   "id": "MCO571586703",

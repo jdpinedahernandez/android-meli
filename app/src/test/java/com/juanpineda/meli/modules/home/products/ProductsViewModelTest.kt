@@ -109,6 +109,26 @@ class ProductsViewModelTest {
         }
 
     @Test
+    fun `endSearch products by category return empty list`() =
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            // given
+            given(getProductsByCategory.invoke(ArgumentMatchers.anyString())).willReturn(
+                SuccessResponse(
+                    emptyList()
+                )
+            )
+            sut.model.observeForever(observer)
+            // when
+            sut.callPrivateFun("getProductsByCategory", "")
+            // then
+            verify(observer).onChanged(
+                refEq(
+                    ScopedViewModel.UiModel.EmptyState
+                )
+            )
+        }
+
+    @Test
     fun `endSearchByName products return products`() =
         coroutinesTestRule.testDispatcher.runBlockingTest {
             // given
@@ -146,6 +166,27 @@ class ProductsViewModelTest {
             sut.callPrivateFun("getProductsByName", nameToSearch)
             // then
             verify(observer).onChanged(refEq(ScopedViewModel.UiModel.ErrorState))
+        }
+
+    @Test
+    fun `endSearchByName products return empty list`() =
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            // given
+            val nameToSearch = "celulares"
+            given(getProductByName.invoke(ArgumentMatchers.anyString())).willReturn(
+                SuccessResponse(
+                    emptyList()
+                )
+            )
+            sut.model.observeForever(observer)
+            // when
+            sut.callPrivateFun("getProductsByName", nameToSearch)
+            // then
+            verify(observer).onChanged(
+                refEq(
+                    ScopedViewModel.UiModel.EmptyState
+                )
+            )
         }
 
     @Test
