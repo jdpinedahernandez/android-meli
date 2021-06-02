@@ -70,8 +70,12 @@ class SearchFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         navController = findNavController()
         initViews()
-        addListeners()
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        addListeners()
     }
 
     private fun initViews() {
