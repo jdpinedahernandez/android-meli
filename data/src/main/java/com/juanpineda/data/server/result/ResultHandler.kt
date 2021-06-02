@@ -2,8 +2,8 @@ package com.juanpineda.data.server.result
 
 import com.juanpineda.data.server.result.error.Failure
 
-sealed class ResultHandler<out T : Any>
-class SuccessResponse<out T : Any>(val data: T) : ResultHandler<T>()
+sealed class ResultHandler<out T : Any?>
+class SuccessResponse<out T : Any?>(val data: T) : ResultHandler<T>()
 class ErrorResponse(val failure: Failure) : ResultHandler<Nothing>()
 
 inline fun <T : Any> ResultHandler<T>.onSuccess(action: (T) -> Unit): ResultHandler<T> {
@@ -15,3 +15,10 @@ inline fun <T : Any> ResultHandler<T>.onError(action: ErrorResponse.() -> Unit):
     if (this is ErrorResponse) action(this)
     return this
 }
+
+suspend fun <T> resultHandlerOf(action: suspend () -> T) =
+    try {
+        SuccessResponse(action())
+    } catch (e: Exception) {
+        ErrorResponse(Failure.analyzeException(e))
+    }
