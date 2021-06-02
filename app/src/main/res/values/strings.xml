@@ -21,7 +21,7 @@
     <!--  Search Fragment  -->
     <string name="search_title">Categorías</string>
     <string name="search_favorite_title">Favoritos</string>
-    <string name="search_viewed_title">Vistos</string>
+    <string name="search_viewed_title">Consultas</string>
     <!--  Banner Factory  -->
     <string name="banner_first_category_description">Renueva tu celular</string>
     <string name="banner_first_category_id">MCO1051</string>
@@ -37,7 +37,7 @@
     <!--  Dialog Search  -->
     <string name="dialog_title">Más categorías</string>
     <string name="dialog_first_button">Favoritos</string>
-    <string name="dialog_second_button">Vistos   </string>
+    <string name="dialog_second_button">Consultas</string>
 
     <!--  Product Fragment  -->
     <string name="product_fragment_title">Productos</string>

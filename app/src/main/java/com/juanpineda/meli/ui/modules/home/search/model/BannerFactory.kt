@@ -24,7 +24,7 @@ class BannerFactory(val context: Context) {
         ),
         BannerEntity(
             context.getString(R.string.banner_third_category_description),
-            R.drawable.ic_phone,
+            R.drawable.ic_home,
             Category(
                 context.getString(R.string.banner_third_category_id),
                 context.getString(R.string.banner_third_category_name),

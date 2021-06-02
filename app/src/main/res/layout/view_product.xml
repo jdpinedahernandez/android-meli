@@ -73,24 +73,12 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:lineSpacingMultiplier="1"
+            android:layout_marginEnd="8dp"
             android:padding="2dp"
             android:text="@string/product_main_item_label"
             android:textColor="@android:color/holo_green_dark"
-            app:layout_constraintEnd_toStartOf="@+id/image_view_favorite"
-            app:layout_constraintStart_toEndOf="@+id/product_price"
-            app:layout_constraintTop_toBottomOf="@+id/product_title" />
-
-        <ImageView
-            android:id="@+id/image_view_favorite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@{product.favorite ? @drawable/ic_favorite_on :@drawable/ic_favorite_off}"
-            android:tint="@color/colorAccent"
-            android:visibility="gone"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/text_view_description"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/text_view_description" />
+            app:layout_constraintTop_toBottomOf="@+id/product_title" />
 
         <View
             android:layout_width="0dp"
