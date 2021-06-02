@@ -1,7 +1,7 @@
 # Meli
 
 <p align="center">
-  <img src="https://i.imgur.com/EajLTeN.gif" width="200" />
+  <img src="https://imgur.com/a/AJ7AyIq" width="200" />
 </p>
 
 Meli is an application that allow the user to search for products by predictive category or by product name. It allows the user to see the detail of each product and saves those that the user has seen in detail. And provides the ability to add them to the list of favorite products and viewed products.
