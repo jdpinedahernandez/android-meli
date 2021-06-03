@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.juanpineda.domain.Product
 import com.juanpineda.meli.MeliApp
@@ -68,7 +69,7 @@ class ProductDetailFragment : Fragment() {
         if (product.favorite)
             Snackbar.make(
                 binding.root, getString(R.string.product_detail_favorite),
-                Snackbar.LENGTH_SHORT
+                BaseTransientBottomBar.LENGTH_SHORT
             ).show()
     }
 }

@@ -19,16 +19,16 @@ class ProductDetailInfoView @JvmOverloads constructor(
         text = buildSpannedString {
 
             bold { append(context.getString(R.string.product_detail_price)) }
-            appendln(formatAmount(price))
+            appendLine(formatAmount(price))
 
             bold { append(context.getString(R.string.product_detail_currency)) }
-            appendln(currencyId)
+            appendLine(currencyId)
 
             bold { append(context.getString(R.string.product_detail_available_quantity)) }
-            appendln(availableQuantity.toString())
+            appendLine(availableQuantity.toString())
 
             bold { append(context.getString(R.string.product_detail_pictures)) }
-            appendln(pictures.size.toString())
+            appendLine(pictures.size.toString())
 
             bold { append(warranty) }
         }

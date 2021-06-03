@@ -7,12 +7,10 @@
     <string name="product_detail_price">Precio:</string>
     <string name="product_detail_currency">Moneda:</string>
     <string name="product_detail_available_quantity">Cantidad disponible:</string>
-    <string name="product_detail_name">Nombre:</string>
     <string name="product_detail_favorite">Favorito</string>
     <!--  Main Activity  -->
     <string name="product_main_error">Tenemos inconvenientes.\nIntenta más tarde.</string>
     <string name="product_main_empty">No hay productos registrados.</string>
-    <string name="product_main_empty_products">Bienvenido.\nBusca nuevos productos.</string>
     <string name="product_main_search_label">Buscar</string>
     <string name="product_main_item_label">Envío Gratis</string>
     <string name="information_view_error_button">Reintentar</string>
