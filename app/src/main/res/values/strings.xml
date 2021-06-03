@@ -13,7 +13,6 @@
     <string name="product_main_error">Tenemos inconvenientes.\nIntenta más tarde.</string>
     <string name="product_main_empty">No hay productos registrados.</string>
     <string name="product_main_empty_products">Bienvenido.\nBusca nuevos productos.</string>
-    <string name="product_main_local_title">Productos vistos</string>
     <string name="product_main_search_label">Buscar</string>
     <string name="product_main_item_label">Envío Gratis</string>
     <string name="information_view_error_button">Reintentar</string>
